@@ -25,4 +25,13 @@ git commit -m "This is your DETAILED commit message"
 ```
 You can then go ahead and submit a pull request to the main branch using the Github website!
 ## Important Note for Collaborators
-Please ignore 'index.html' and the css file for now as they are used for testing & demo purposes. We will be using react for this project instead. Please refer to files within 'final-proj'.
+Please ignore `index.html` and the css file for now as they are used for testing & demo purposes. We will be using react for this project instead. Please refer to files within `final-proj`.
+## How to run project
+cd to the directory `final proj` from your current location
+```
+cd final-project
+```
+Execute the below command:
+```
+npm start
+```
