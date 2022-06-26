@@ -18,7 +18,7 @@ $ git checkout -b <name>-<featurename>
 Do you edits as you please (Example: Add your name under Group Members in the README.md file)
 Next, stage your changes.
 ```
-$ git add.
+$ git add .
 ```
 Commit your changes:
 ```
