@@ -24,4 +24,4 @@ Commit your changes:
 ```
 $ git commit -m "This is your DETAILED commit message"
 ```
-You can then go ahead and submit a pull request to the main branch using the Github website!-
+You can then go ahead and submit a pull request to the main branch using the Github website!
