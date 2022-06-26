@@ -29,7 +29,7 @@ Please ignore `index.html` and the css file for now as they are used for testing
 ## How to run project
 cd to the directory `final proj` from your current location
 ```
-cd final-project
+cd final-proj
 ```
 Execute the below command:
 ```
