@@ -3,6 +3,7 @@
 1. Joyce Lim 1005307
 2. Christopher Wah Boon Chuan 1005214
 3. Shaun Neo Kay Hean 1005201
+4. Amrita Shah 1005253
 ## Collaborating
 This is to get everyone familiarise with github commands and to get everyone started on the project. Start by cloning this project using `git clone`:
 ```
