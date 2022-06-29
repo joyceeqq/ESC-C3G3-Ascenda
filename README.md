@@ -1,6 +1,7 @@
 # ESC-C3G3-Ascenda
 ## Group Members
 1. Joyce Lim 1005307
+2. Christopher Wah Boon Chuan 1005214
 ## Collaborating
 This is to get everyone familiarise with github commands and to get everyone started on the project. Start by cloning this project using `git clone`:
 ```
