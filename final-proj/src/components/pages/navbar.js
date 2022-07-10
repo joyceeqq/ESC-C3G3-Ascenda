@@ -38,6 +38,11 @@ export default function Navbar() {
                Tables
              </NavLink>
            </li>
+           <li className="nav-item">
+             <NavLink className="nav-link" to="/redeem">
+               Redeem
+             </NavLink>
+           </li>
          </ul>
        </div>
      </nav>

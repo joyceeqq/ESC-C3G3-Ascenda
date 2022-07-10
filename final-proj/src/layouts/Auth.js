@@ -7,7 +7,7 @@ import { Container, Row, Col } from "reactstrap";
 import AuthNavbar from "./../components/Navbars/AuthNavbar.js";
 //import AuthFooter from "./../components/Footers/AuthFooter.js";
 
-import routes from "./../routes.js";
+import Navs from "./../routes.js";
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);
@@ -25,8 +25,8 @@ const Auth = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
-  const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
+  const getRoutes = (Navs) => {
+    return Routes.map((prop, key) => {
       if (prop.layout === "/auth") {
         return (
           <Route
@@ -79,8 +79,8 @@ const Auth = (props) => {
         <Container className="mt--8 pb-5">
           <Row className="justify-content-center">
             <Routes>
-              {getRoutes(routes)}
-              <Navigate from="*" to="/auth/login" />
+              {getRoutes(Navs)}
+              <Route from="*" to="/auth/login" />
             </Routes>
           </Row>
         </Container>

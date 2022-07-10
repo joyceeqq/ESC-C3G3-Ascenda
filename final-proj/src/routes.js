@@ -6,7 +6,7 @@ import Index from "./views/Index.js";
 import Tables from "./views/examples/Tables.js";
 // import Icons from "./views/examples/Icons.js";
 
-var routes = [
+var Navs = [
   {
     path: "/index",
     name: "Dashboard",
@@ -22,4 +22,4 @@ var routes = [
     layout: "/admin",
   },
 ];
-export default routes;
+export default Navs;
