@@ -9,16 +9,18 @@ import RecordList from "./components/recordList.js";
 import Edit from "./components/edit.js";
 import Create from "./components/create.js";
 import AuthLayout from "./layouts/Auth.js";
+import Tables from "./views/examples/Tables.js"
 
 const App = () => {
  return (
    <div>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Navigate from="/" to="/admin/index" />
-    </Routes>
-  </BrowserRouter>
+     <Navbar />
+     <Routes>
+       <Route exact path="/" element={<RecordList />} />
+       <Route path="/edit/:id" element={<Edit />} />
+       <Route path="/create" element={<Create />} />
+       <Route path="/tables" element={<Tables />} />
+     </Routes>
    </div>
  );
 };
