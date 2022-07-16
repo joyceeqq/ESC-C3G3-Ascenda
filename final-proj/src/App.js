@@ -10,7 +10,7 @@ import RecordList from "./components/pages/recordList.js";
 import Edit from "./components/pages/edit.js";
 import Create from "./components/pages/create.js";
 import Tables from "./components/pages/Tables.js";
-import CardDetails from "./components/pages/redeem1.js";
+import CardDetails from "./components/pages/redeem.js";
 
 const App = () => {
  return (

@@ -1,108 +1,72 @@
-import React from 'react';
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Typography from '@mui/material/Typography';
-// import { Button, CardActionArea, CardActions } from '@mui/material';
-
-import {Container ,Card, Col, Button} from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Row, Col, Container, Button } from "react-bootstrap";
 
 const CardDetails = () => {
-  const cardInfo = [
-    {
-      image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-      companyName: "Barclays",
-      exchangeRate: "1400  points to 400  miles",
-      exchangeTime:"4  to  6  hours",
-      minAmount:"1400 points",
-    },
-    {
-      image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-      companyName: "Barclays",
-      exchangeRate: "1400  points to 400  miles",
-      exchangeTime:"4  to  6  hours",
-      minAmount:"1400 points",
-    },
-    {
-      image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-      companyName: "Barclays",
-      exchangeRate: "1400  points to 400  miles",
-      exchangeTime:"4  to  6  hours",
-      minAmount:"1400 points",
-    },
-    {
-      image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-      companyName: "Barclays",
-      exchangeRate: "1400  points to 400  miles",
-      exchangeTime:"4  to  6  hours",
-      minAmount:"1400 points",
-    },
-    {
-      image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-      companyName: "Barclays",
-      exchangeRate: "1400  points to 400  miles",
-      exchangeTime:"4  to  6  hours",
-      minAmount:"1400 points",
-    },
-    {
-      image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-      companyName: "Barclays",
-      exchangeRate: "1400  points to 400  miles",
-      exchangeTime:"4  to  6  hours",
-      minAmount:"1400 points",
-    },
-  ];
-
-  const renderCard = (card, index) => {
+    const cardInfo = [
+      {
+        image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
+        companyName: "Barclays",
+        exchangeRate: "1400  points to 400  miles",
+        exchangeTime:"4  to  6  hours",
+        minAmount:"1400 points",
+      },
+      {
+        image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
+        companyName: "Barclays",
+        exchangeRate: "1400  points to 400  miles",
+        exchangeTime:"4  to  6  hours",
+        minAmount:"1400 points",
+      },
+      {
+        image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
+        companyName: "Barclays",
+        exchangeRate: "1400  points to 400  miles",
+        exchangeTime:"4  to  6  hours",
+        minAmount:"1400 points",
+      },
+      {
+        image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
+        companyName: "Barclays",
+        exchangeRate: "1400  points to 400  miles",
+        exchangeTime:"4  to  6  hours",
+        minAmount:"1400 points",
+      },
+      {
+        image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
+        companyName: "Barclays",
+        exchangeRate: "1400  points to 400  miles",
+        exchangeTime:"4  to  6  hours",
+        minAmount:"1400 points",
+      },
+      {
+        image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
+        companyName: "Barclays",
+        exchangeRate: "1400  points to 400  miles",
+        exchangeTime:"4  to  6  hours",
+        minAmount:"1400 points",
+      },
+    ];
     return (
-      <Card style={{ width: '18rem' }} key={index} className="box">
-        <Card.Img variant="top" src={card.image}/>
-        <Card.Body>
-          <Card.Title>{card.companyName}</Card.Title>
-          <Card.Text>
-            <p>Exchange Rate: {card.exchangeRate}</p>
-            <p>Minimum transfer amount: {card.minAmount}</p>
-            <p>Estimated Transfer Time: {card.exchangeTime}</p>
-          </Card.Text>
-          <Button variant="primary">Transfer</Button>
-        </Card.Body>
-      </Card>
-    );
-  };
+        <Container>
+            <Row>
+                {cardInfo.map((card, k) => (
+                    <Col key={k} xs={12} md={4} lg={3}>
+                        <Card >
+                            <Card.Img src={card.image} />
 
-  return <div className="grid">{cardInfo.map(renderCard)}</div>;
-};
-
-
-
-
-// <Card sx={{ maxWidth: 345 }} key={index} className="box">
-// <CardActionArea>
-//   <CardMedia
-//     component="img"
-//     height="140"
-//     src={card.image}
-//   />
-//   <CardContent>
-//     <Typography gutterBottom variant="h5" component="div">
-//       {card.companyName}
-//     </Typography>
-//     <Typography variant="body2" color="text.secondary">
-//       Exchange Rate: {card.exchangeRate}
-//     </Typography>
-//     <Typography variant="body2" color="text.secondary">
-//       Estimated Transfer Time: {card.exchangeTime}
-//     </Typography>
-//     <Typography variant="body2" color="text.secondary">
-//       Minimum transfer amount: {card.minAmount}
-//     </Typography>
-//   </CardContent>
-// </CardActionArea>
-// <CardActions>
-//   <Button size="small" color="primary">
-//     Transfer
-//   </Button>
-// </CardActions>
-// </Card>
+                            <Card.Body>
+                                <Card.Title>{card.companyName}</Card.Title>
+                                <Card.Text>Exchange Rate: {card.exchangeRate}</Card.Text>
+                                <Card.Text>Estimated Transfer Time: {card.exchangeTime}</Card.Text>
+                                <Card.Text>Minimum Exchange Amount: {card.minAmount}</Card.Text>
+                                <Button variant="primary">Transfer</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
+    )
+}
 
 export default CardDetails;
