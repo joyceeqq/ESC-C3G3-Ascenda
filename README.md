@@ -27,6 +27,11 @@ Commit your changes:
 git commit -m "This is your DETAILED commit message"
 ```
 You can then go ahead and submit a pull request to the main branch using the Github website!
+## Check backend connection before running project
+```
+cd backend
+nodemon server
+```
 ## How to run project (After cloning + pulling from main)
 cd to the directory `final proj` from your current location
 ```
