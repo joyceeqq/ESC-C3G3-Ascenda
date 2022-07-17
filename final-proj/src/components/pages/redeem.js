@@ -1,46 +1,12 @@
 import React, {useState } from 'react'
 import { Card, Row, Col, Container, Button, Modal, Form, ModalDialog } from "react-bootstrap";
 import Header from "./../../components/Headers/Header.js";
+import ModalContent from '../Modals/membershipDets.js';
 const CardDetails = () => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const [cardCompanyName, setCardCompanyName] = useState("Barclays");
-
-  const ModalContent = () => {
-    return (
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{cardCompanyName}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Membership#</Form.Label>
-              <Form.Control
-                type="text"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Confirm Membership#</Form.Label>
-              <Form.Control
-                type="text"
-                autoFocus
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Save Membership
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    )
-  }
 
   const cardInfo = [
     {
@@ -99,9 +65,9 @@ const CardDetails = () => {
                             <Card.Img src={card.image} />
                             <Card.Body>
                                 <Card.Title>{card.companyName}</Card.Title>
-                                <Card.Text>Exchange Rate: {card.exchangeRate}</Card.Text>
-                                <Card.Text>Estimated Transfer Time: {card.exchangeTime}</Card.Text>
-                                <Card.Text>Minimum Exchange Amount: {card.minAmount}</Card.Text>
+                                <Card.Text>Exchange Rate: <br></br>{card.exchangeRate}</Card.Text>
+                                <Card.Text>Estimated Transfer Time: <br></br>{card.exchangeTime}</Card.Text>
+                                <Card.Text>Minimum Exchange Amount: <br></br> {card.minAmount}</Card.Text>
                                 <Button variant="primary" onClick={handleShow}>Transfer</Button>
                                 <br></br>
                             </Card.Body>
@@ -112,7 +78,8 @@ const CardDetails = () => {
                     
                 ))}
             </Row>
-            {show ? <ModalContent/> : null}
+            {/* {show ? <ModalContent/> : null} */}
+            <ModalContent show={show} close={handleClose} />
         </div>
         
       </>
