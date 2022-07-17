@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Row, Col, Container, Button } from "react-bootstrap";
-
+import Header from "./../../components/Headers/Header.js";
 const CardDetails = () => {
     const cardInfo = [
       {
@@ -47,25 +47,35 @@ const CardDetails = () => {
       },
     ];
     return (
+      <>
+      <Header />
+      <br></br>
         <Container>
             <Row>
                 {cardInfo.map((card, k) => (
                     <Col key={k} xs={12} md={4} lg={3}>
                         <Card >
                             <Card.Img src={card.image} />
-
+                          
                             <Card.Body>
                                 <Card.Title>{card.companyName}</Card.Title>
                                 <Card.Text>Exchange Rate: {card.exchangeRate}</Card.Text>
                                 <Card.Text>Estimated Transfer Time: {card.exchangeTime}</Card.Text>
                                 <Card.Text>Minimum Exchange Amount: {card.minAmount}</Card.Text>
                                 <Button variant="primary">Transfer</Button>
+                                <br></br>
                             </Card.Body>
+                            <br></br>
                         </Card>
+                        <br></br>
                     </Col>
+                    
                 ))}
             </Row>
+            <br></br>
         </Container>
+        <br></br>
+        </>
     )
 }
 
