@@ -11,6 +11,7 @@ const CardDetails = () => {
 
 
   const userName = "Gerard Tan";
+  const numberPoints = 10000;
   const [chosenCompany, setChosenCompany] = useState("");
 
 
@@ -86,7 +87,7 @@ const CardDetails = () => {
                     
                 ))}
             </Row>
-            <ModalContent show={show} close={handleClose} userName={userName} chosenCompany={chosenCompany} />
+            <ModalContent show={show} close={handleClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints}/>
         </div>
         
       </>

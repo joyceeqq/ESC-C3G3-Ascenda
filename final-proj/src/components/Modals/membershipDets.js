@@ -19,7 +19,7 @@ const ModalContent = (props) => {
 
   function saveMembership(){
     setPointsShow(true);
-    return props.close;
+    props.close();
   }
 
     return (
@@ -60,7 +60,7 @@ const ModalContent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsModalContent show={pointsshow} close={handlePointsClose} userName={userName} chosenCompany={chosenCompany} />
+      <PointsModalContent show={pointsshow} close={handlePointsClose} userName={userName} chosenCompany={chosenCompany} numberPoints={props.numberPoints}/>
     </div>
     )
   }

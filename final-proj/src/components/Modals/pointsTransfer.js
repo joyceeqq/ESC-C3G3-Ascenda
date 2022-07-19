@@ -10,7 +10,7 @@ const PointsModalContent = (props) => {
     return (
       <Modal show={props.show} onHide={props.close}>
         <Modal.Header closeButton>
-          <Modal.Title>{pointsToTransfer}</Modal.Title>
+          <Modal.Title>Available points: {props.numberPoints}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
