@@ -44,7 +44,7 @@ export default function Navbar() {
            
            <li className="nav-item">
              <NavLink className="nav-link" to="/create">
-               Login
+               Sign Out
              </NavLink>
            </li>
          </ul>
