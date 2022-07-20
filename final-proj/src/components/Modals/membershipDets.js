@@ -5,9 +5,6 @@ import PointsModalContent from "./pointsTransfer";
 
 
 const ModalContent = (props) => {
-  // const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
 
   const [pointsshow, setPointsShow] = useState(false);
   const handlePointsClose = () => setPointsShow(false);
@@ -15,9 +12,26 @@ const ModalContent = (props) => {
     
   const chosenCompany = props.chosenCompany;
   const userName = props.userName;
-  
 
-  function saveMembership(){
+  const [input, setInput] = useState({
+    membershipID: "",
+    confirmMemID: ""
+  })
+  
+  function handleChange(event){
+    const {name, value} = event.target;
+
+    setInput(prevInput => {
+      return {
+        ...prevInput,
+        [name]: value
+      }
+    })
+  }
+
+  function saveMembership(event){
+    event.preventDefault();
+    console.log(input);
     setPointsShow(true);
     props.close();
   }
@@ -30,7 +44,7 @@ const ModalContent = (props) => {
         </Modal.Header>
         <Modal.Body>
             <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                 <Form.Label>Primary Cardholder</Form.Label>
                 <Form.Control
                     type="text"
@@ -38,11 +52,13 @@ const ModalContent = (props) => {
                     readOnly
                 />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" >
                 <Form.Label>Membership#</Form.Label>
                 <Form.Control
                     type="text"
                     autoFocus
+                    onChange={handleChange}
+                    name="membershipID"
                 />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -50,12 +66,14 @@ const ModalContent = (props) => {
                 <Form.Control
                     type="text"
                     autoFocus
+                    onChange={handleChange}
+                    name="confirmMemID"
                 />
                 </Form.Group>
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={saveMembership}>
+          <Button variant="primary" onClick={saveMembership} type="submitv  ">
             Save Membership
           </Button>
         </Modal.Footer>
