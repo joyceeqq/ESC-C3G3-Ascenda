@@ -18,6 +18,7 @@
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import { userName, numberPoints } from "views/pages/Redeem";
 
 const Header = () => {
   return (
@@ -38,7 +39,7 @@ const Header = () => {
                           tag="h2"
                           className=" font-weight-bold mb-0"
                         >
-                          Hello Gerard!
+                          Hello {userName}!
                         </CardTitle>
                        
                         
@@ -49,7 +50,7 @@ const Header = () => {
             
                        
                         <span className="h5 text-muted mb-0">
-                          Number of Points Available : 34543
+                          Number of Points Available : {numberPoints}
                         </span>
                       
                       </div>

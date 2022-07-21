@@ -17,11 +17,10 @@
 */
 import Index from "views/Index.js";
 import Profile from "views/pages/Profile.js";
-import Maps from "views/pages/Maps.js";
 import Register from "views/pages/Register.js";
 import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
-import Icons from "views/pages/Icons.js";
+import CardDetails from "views/pages/Redeem";
 
 var routes = [
   {
@@ -32,17 +31,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
-    name: "Icons",
+    path: "/redeem",
+    name: "Redeem",
     icon: "ni ni-planet text-blue",
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    component: Maps,
+    component: CardDetails,
     layout: "/admin",
   },
   {
