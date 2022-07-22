@@ -14,18 +14,27 @@ const ProgramModalContent = (props) => {
   const [membershipID, setMembershipID] = useState('');
   const [confirmID, setConfirmID] = useState('');
   
-  const handleSubmit = event => {
-    console.log('handleSubmit ran');
+  function handleSubmit(event){
     event.preventDefault(); // prevent page refresh
+    console.log('handleSubmit ran');
 
-    // access input values here
-    
+    // const newMember= {
+    //   membershipID: membershipID,
+    //   confirmID: confirmID
+    // }
+
+    // axios.post('http://localhost:3001/create', newMember);
+
+    //show the points transfer modal
+    setPointsShow(true);
+    props.close();
+
     // clear all input values in the form
     setMembershipID('');
     setConfirmID('');
-
-    setPointsShow(true);
-    props.close();
+    // access input values here
+    
+    
   };
 
     return (
@@ -72,7 +81,7 @@ const ProgramModalContent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID}/>
+      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName}/>
     </div>
     )
   }

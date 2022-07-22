@@ -1,9 +1,11 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState } from 'react';
+import axios from "axios";
 
 import { numberPoints } from "views/pages/Redeem";
 
 const PointsModalContent = (props) => {
+    const userName = props.userName;
     const chosenCompany = props.chosenCompany;
     const membershipID = props.membershipID;
     const [pointsToTransfer, setPointsToTransfer] = useState(0);
@@ -13,7 +15,16 @@ const PointsModalContent = (props) => {
       event.preventDefault(); // prevent page refresh
   
       // access input values here
-      
+      const newMember= {
+        programID: chosenCompany,
+        memberID: membershipID,
+        memberName: userName,
+        transactionDate: new Date().getDate(),
+        refNumber: 1,
+        amount: pointsToTransfer
+      }
+  
+      axios.post('http://localhost:3001/create', newMember);
       // clear all input values in the form
       setPointsToTransfer(0);
       props.close();
