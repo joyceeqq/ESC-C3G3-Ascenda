@@ -10,12 +10,12 @@ router.route("/create").post((req, res) => {
     const refNumber = req.body.refNumber;
     const amount = req.body.amount;
     const newMember = new member({
-        programID,
-        memberID,
-        memberName,
-        transactionDate,
-        refNumber,
-        amount
+        LoyaltyprogramID: programID,
+        membershipID: memberID,
+        memberName: memberName,
+        transactionDate: transactionDate,
+        refNumber: refNumber,
+        amount: amount,
     });
     newMember.save();
 })

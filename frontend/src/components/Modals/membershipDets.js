@@ -16,25 +16,20 @@ const ProgramModalContent = (props) => {
   
   function handleSubmit(event){
     event.preventDefault(); // prevent page refresh
-    console.log('handleSubmit ran');
-
-    // const newMember= {
-    //   membershipID: membershipID,
-    //   confirmID: confirmID
-    // }
-
-    // axios.post('http://localhost:3001/create', newMember);
-
-    //show the points transfer modal
-    setPointsShow(true);
-    props.close();
-
-    // clear all input values in the form
-    setMembershipID('');
-    setConfirmID('');
-    // access input values here
     
-    
+    if(membershipID === confirmID){
+      //show the points transfer modal
+      setPointsShow(true);
+      props.close();  
+    }
+    else{
+      alert("Please check that both IDs are the same.")
+    }
+  };
+
+  function clearMemIDFields(){
+    setMembershipID('')
+    setConfirmID('')
   };
 
     return (
@@ -81,7 +76,7 @@ const ProgramModalContent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName}/>
+      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName} clearMemIDFields={clearMemIDFields}/>
     </div>
     )
   }

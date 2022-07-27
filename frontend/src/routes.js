@@ -4,7 +4,6 @@ import Register from "views/pages/Register.js";
 import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
 import CardDetails from "views/pages/Redeem";
-import { cardInfo } from "./views/pages/Redeem";
 
 var routes = [
   {

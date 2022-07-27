@@ -56,16 +56,9 @@ export const cardInfo = [
 
 const CardDetails = () => {
 
-  // let history = useHistory();
-  // function navigateToProgramModal(companyName) {
-  //   console.log(routes);
-  //   history.replace(`./`+companyName)
-  // }
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
-  
   const [chosenCompany, setChosenCompany] = useState("");
   
     return (
@@ -87,7 +80,6 @@ const CardDetails = () => {
                                 <Button id={card.companyName.trim()} variant="primary" onClick={() => {
                                   setChosenCompany(card.companyName);
                                   setShow(true)
-                                  // navigateToProgramModal(card.companyName)
                                 }}>Transfer</Button>
                                 <br></br>
                             </Card.Body>
