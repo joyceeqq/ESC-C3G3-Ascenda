@@ -1,7 +1,7 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState } from 'react';
 import axios from "axios";
-import { numberPoints } from "views/pages/Redeem";
+import { numberPoints, setNumberPoints } from "views/pages/Redeem";
 
 const PointsModalContent = (props) => {
     const userName = props.userName;
@@ -10,8 +10,7 @@ const PointsModalContent = (props) => {
     const [pointsToTransfer, setPointsToTransfer] = useState(0);
 
     const handleSubmit = event => {
-      console.log('handleSubmit ran');
-      console.log(membershipID)
+      setNumberPoints(pointsToTransfer);
       
       event.preventDefault(); // prevent page refresh
   

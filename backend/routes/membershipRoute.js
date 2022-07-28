@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const member = require("./../src/Model/membershipModel");
+const member = require("./../Model/membershipModel");
  
 router.route("/create").post((req, res) => {
     const programID = req.body.programID;
