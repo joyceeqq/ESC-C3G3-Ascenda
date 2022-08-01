@@ -8,7 +8,10 @@ const PointsConfirm= (props) => {
     const chosenCompany = props.chosenCompany;
     const membershipID = props.membershipID;
     const [pointsToTransfer, setPointsToTransfer] = useState(0);
-    const confirmationCode = "FTU73754";
+    //const confirmationCode = "FTU73754";
+    var phoneToken = require('generate-sms-verification-code');
+ 
+    var generatedToken = phoneToken(8, {type: 'number'});
     const [pointsshow, setPointsShow] = useState(false);
     const handlePointsClose = () => {
       setPointsShow(false);
@@ -45,7 +48,7 @@ const PointsConfirm= (props) => {
 
         </Modal.Header>
         <Modal.Body>
-            <p>Confirmation Code: {confirmationCode}</p>
+            <p>Confirmation Code: {generatedToken}</p>
            
         </Modal.Body>
         <Modal.Footer>
