@@ -48,7 +48,7 @@ const PointsConfirm= (props) => {
 
         </Modal.Header>
         <Modal.Body>
-            <p>Confirmation Code: {generatedToken}</p>
+            <p>Confirmation Code: <b>{generatedToken}</b></p>
            
         </Modal.Body>
         <Modal.Footer>
