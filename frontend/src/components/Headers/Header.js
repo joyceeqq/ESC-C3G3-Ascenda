@@ -49,7 +49,7 @@ const Header = () => {
 
             
                        
-                        <span className="h5 text-muted mb-0">
+                        <span className="h4 text-muted mb-0">
                           Number of Points Available : {numberPoints}
                         </span>
                       

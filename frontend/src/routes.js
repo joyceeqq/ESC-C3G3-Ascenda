@@ -14,16 +14,16 @@ var routes = [
     component: Index,
     layout: "/admin",
   },
-  {
+  /*{
     path: "/user-profile",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
     layout: "/admin",
-  },
+  },*/
   {
     path: "/redeem",
-    name: "Redeem",
+    name: "Redeem Rewards",
     icon: "ni ni-shop text-blue",
     component: CardDetails,
     layout: "/admin",

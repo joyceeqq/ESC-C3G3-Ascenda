@@ -5,8 +5,8 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import Header from "components/Headers/Header.js";
 import ProgramModalContent from 'components/Modals/membershipDets';
 
-export const userName = "Gerard Tan";
-export let numberPoints = 500;
+export const userName = "Jessica Jones";
+export let numberPoints = 1500;
 export function setNumberPoints(value){
   numberPoints -= value;
 }
