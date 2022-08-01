@@ -1,27 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const member = require("./../Model/membershipModel");
 const program = require("./../Model/programModel");
-const programDet = require("./../Model/programDetailModel")
  
-router.route("/createmember").post((req, res) => {
-    const programID = req.body.programID;
-    const memberID = req.body.memberID;
-    const memberName = req.body.memberName;
-    const transactionDate = req.body.transactionDate;
-    const refNumber = req.body.refNumber;
-    const amount = req.body.amount;
-    const newMember = new member({
-        LoyaltyProgramID: programID,
-        membershipID: memberID,
-        memberName: memberName,
-        transactionDate: transactionDate,
-        refNumber: refNumber,
-        amount: amount,
-    });
-    newMember.save();
-})
-
 router.route("/createprogram").post((req, res) => {
     const programID = req.body.programID;
     const programName = req.body.programName;
@@ -40,10 +20,6 @@ router.route("/createprogram").post((req, res) => {
         description: description
     });
     newProgram.save();
-})
-
-router.route("/admin/redeem").get((req, res) => {
-    programDet.find().then(foundPrograms => res.json(foundPrograms))
 })
 
 module.exports = router;

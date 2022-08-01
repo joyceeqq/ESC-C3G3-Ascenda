@@ -24,7 +24,7 @@ const PointsModalContent = (props) => {
         amount: pointsToTransfer
       }
   
-      axios.post('http://localhost:3001/create', newMember);
+      axios.post('http://localhost:3001/createmember', newMember);
       // clear all input values in the form
       setPointsToTransfer(0);
       props.clearMemIDFields();

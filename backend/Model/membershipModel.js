@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
+
+const myDB = mongoose.connection.useDb('membershipIds')
 const Schema = mongoose.Schema;
 
 let newMemberSchema = new Schema({
-    LoyaltyprogramID: String,
+    LoyaltyProgramID: String,
     membershipID: String,
     memberName: String,
     transactionDate: Date,
@@ -10,4 +13,4 @@ let newMemberSchema = new Schema({
     amount: Number,
 });
 
-module.exports = mongoose.model('member', newMemberSchema);
+module.exports = myDB.model('member', newMemberSchema);

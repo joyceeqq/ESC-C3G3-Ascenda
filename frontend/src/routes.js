@@ -4,6 +4,7 @@ import Register from "views/pages/Register.js";
 import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
 import CardDetails from "views/pages/Redeem";
+import AddProgram from "views/pages/AddProgram";
 
 var routes = [
   {
@@ -14,13 +15,6 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/redeem",
-    name: "Redeem",
-    icon: "ni ni-planet text-blue",
-    component: CardDetails,
-    layout: "/admin",
-  },
-  {
     path: "/user-profile",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
@@ -28,10 +22,24 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/redeem",
+    name: "Redeem",
+    icon: "ni ni-shop text-blue",
+    component: CardDetails,
+    layout: "/admin",
+  },
+  {
     path: "/tables",
-    name: "Tables",
+    name: "Transaction History",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
+    layout: "/admin",
+  },
+  {
+    path: "/addProgram",
+    name: "Add Program",
+    icon: "ni ni-money-coins text-green",
+    component: AddProgram,
     layout: "/admin",
   },
   {
@@ -48,6 +56,7 @@ var routes = [
     component: Register,
     layout: "/auth",
   },
+  
 ];
 
 // for(let program in cardInfo){
