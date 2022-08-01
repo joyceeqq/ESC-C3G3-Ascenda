@@ -20,16 +20,16 @@ var routes = [
     component: CardDetails,
     layout: "/admin",
   },
-  {
+ /* {
     path: "/user-profile",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
     layout: "/admin",
-  },
+  },*/
   {
     path: "/tables",
-    name: "Tables",
+    name: "Transaction History",
     icon: "ni ni-bullet-list-67 text-red",
     component: Tables,
     layout: "/admin",

@@ -175,20 +175,9 @@ const Tables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Another action
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                          
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>

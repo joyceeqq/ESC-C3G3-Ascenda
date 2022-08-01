@@ -2,24 +2,21 @@ import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState } from 'react';
 import axios from "axios";
 import { numberPoints, setNumberPoints } from "views/pages/Redeem";
-import PointsConfirm from "./Confirmation";
 
-const PointsModalContent = (props) => {
+const PointsConfirm= (props) => {
     const userName = props.userName;
     const chosenCompany = props.chosenCompany;
     const membershipID = props.membershipID;
     const [pointsToTransfer, setPointsToTransfer] = useState(0);
+    const confirmationCode = "FTU73754";
     const [pointsshow, setPointsShow] = useState(false);
-    const handlePointsClose = () => setPointsShow(false);
-    
-
-
+    const handlePointsClose = () => {
+      setPointsShow(false);
+      props.close(); 
+    }
     const handleSubmit = event => {
-      setNumberPoints(pointsToTransfer);
       
       event.preventDefault(); // prevent page refresh
-      setPointsShow(true);
-      props.close(); 
   
       // access input values here
       const newMember= {
@@ -30,6 +27,7 @@ const PointsModalContent = (props) => {
         refNumber: 1,
         amount: pointsToTransfer
       }
+     
   
       axios.post('http://localhost:3001/create', newMember);
       // clear all input values in the form
@@ -42,34 +40,25 @@ const PointsModalContent = (props) => {
       <div>
       <Modal show={props.show} onHide={props.close}>
         <Modal.Header closeButton>
-          <Modal.Title>Transfer Your Miles</Modal.Title><br></br>
-          <p>Transfer your miles to your <b>{chosenCompany}</b> account:</p>
-          <p><em>{membershipID}</em></p>
+          <Modal.Title><h1>Success!</h1></Modal.Title><br></br>
+          
+
         </Modal.Header>
         <Modal.Body>
-            <p>Available points: {numberPoints}</p>
-            <p>Membership ID: {membershipID}</p>
-            <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Total Rewards to Transfer</Form.Label>
-                <Form.Control
-                    type="number"
-                    autoFocus
-                    value={pointsToTransfer}
-                    onChange={event=> setPointsToTransfer(event.target.value)}
-                />
-                </Form.Group>
-            </Form>
+            <p>Confirmation Code: {confirmationCode}</p>
+           
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Complete Transfer
+          <Button variant="primary" type="submit" onClick={handlePointsClose}>
+            Done
           </Button>
         </Modal.Footer>
+        
       </Modal>
-      <PointsConfirm show={pointsshow} close={handlePointsClose}  />
-     </div>
+     
+
+      </div>
     )
   }
 
-  export default PointsModalContent;
+  export default PointsConfirm;

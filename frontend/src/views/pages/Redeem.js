@@ -8,8 +8,8 @@ import ProgramModalContent from 'components/Modals/membershipDets';
 // // connect to MongoClient
 // import cardValues from "./../../../../backend/server1"
 
-export const userName = "Gerard Tan";
-export let numberPoints = 500;
+export const userName = "Jessica Jones";
+export let numberPoints = 1500;
 export function setNumberPoints(value){
   numberPoints -= value;
 }

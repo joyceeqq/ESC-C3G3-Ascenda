@@ -47,9 +47,7 @@ const Header = () => {
                       </div>
                       <div className={"h-3/5 w-1/4 flex flex-col"}> 
 
-            
-                       
-                        <span className="h5 text-muted mb-0">
+                        <span className="h4 text-muted mb-0">
                           Number of Points Available : {numberPoints}
                         </span>
                       
