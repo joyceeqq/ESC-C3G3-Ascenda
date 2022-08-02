@@ -5,6 +5,7 @@ import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
 import CardDetails from "views/pages/Redeem";
 import AddProgram from "views/pages/AddProgram";
+import Maps from "views/pages/Maps";
 
 var routes = [
   {
@@ -14,13 +15,13 @@ var routes = [
     component: Index,
     layout: "/admin",
   },
-  /*{
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: Profile,
+  {
+    path: "/maps",
+    name: "test function",
+    icon: "ni ni-tv-2 text-primary",
+    component: Maps,
     layout: "/admin",
-  },*/
+  },
   {
     path: "/redeem",
     name: "Redeem Rewards",

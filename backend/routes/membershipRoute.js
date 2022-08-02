@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const member = require("./../Model/membershipModel");
 const program = require("./../Model/programModel");
-const programDet = require("./../Model/programDetailModel")
+const programDet = require("./../Model/programDetailModel");
+const transactionDet = require("./../Model/transactionDetailModel");
+const {jsonToCSV, createHeader, createFileName} = require("../Functions/generateTransactionCSV");
+const {connectToSFTP, putDataToSFTP} = require("../sftp");
  
 router.route("/createmember").post((req, res) => {
     const programID = req.body.programID;
@@ -45,5 +48,17 @@ router.route("/createprogram").post((req, res) => {
 router.route("/admin/redeem").get((req, res) => {
     programDet.find().then(foundPrograms => res.json(foundPrograms))
 })
+
+router.route("/admin/sendsftp").get((req, res) => {
+    transactionDet.find({}, '-_id').lean().then(transDocs => {
+        let header = createHeader(transDocs[0]);
+        let fileName = "./TransactionCSVs/";
+        fileName += createFileName();
+        jsonToCSV(header, transDocs, fileName);
+
+        let remoteName = createFileName();
+        putDataToSFTP(fileName, remoteName);
+    });
+});
 
 module.exports = router;
