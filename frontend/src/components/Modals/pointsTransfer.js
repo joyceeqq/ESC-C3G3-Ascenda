@@ -11,15 +11,10 @@ const PointsModalContent = (props) => {
     const [pointsToTransfer, setPointsToTransfer] = useState(0);
     const [pointsshow, setPointsShow] = useState(false);
     const handlePointsClose = () => setPointsShow(false);
-    
-
 
     const handleSubmit = event => {
       setNumberPoints(pointsToTransfer);
-      
-      event.preventDefault(); // prevent page refresh
-      setPointsShow(true);
-      props.close(); 
+      event.preventDefault(); // prevent page refresh 
   
       // access input values here
       const newMember= {
@@ -31,11 +26,12 @@ const PointsModalContent = (props) => {
         amount: pointsToTransfer
       }
   
-      axios.post('http://localhost:3001/create', newMember);
+      axios.post('http://localhost:3001/createmember', newMember);
       // clear all input values in the form
       setPointsToTransfer(0);
       props.clearMemIDFields();
       props.close();
+      setPointsShow(true);
     };
 
     return (
@@ -43,12 +39,10 @@ const PointsModalContent = (props) => {
       <Modal show={props.show} onHide={props.close}>
         <Modal.Header closeButton>
           <Modal.Title>Transfer Your Miles</Modal.Title><br></br>
-          <p>Transfer your miles to your <b>{chosenCompany}</b> account:</p>
-          <p><em>{membershipID}</em></p>
         </Modal.Header>
         <Modal.Body>
+          <p>Transfer your miles to your <b>{chosenCompany}</b> account:<b>{membershipID}</b></p>
             <p>Available points: {numberPoints}</p>
-            <p>Membership ID: {membershipID}</p>
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Total Rewards to Transfer</Form.Label>

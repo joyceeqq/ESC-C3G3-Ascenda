@@ -1,14 +1,9 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState } from 'react';
 import axios from "axios";
-import { numberPoints, setNumberPoints } from "views/pages/Redeem";
 
 const PointsConfirm= (props) => {
-    const userName = props.userName;
-    const chosenCompany = props.chosenCompany;
-    const membershipID = props.membershipID;
-    const [pointsToTransfer, setPointsToTransfer] = useState(0);
-    //const confirmationCode = "FTU73754";
+    
     var phoneToken = require('generate-sms-verification-code');
  
     var generatedToken = phoneToken(8, {type: 'number'});

@@ -6,6 +6,8 @@ import PointsModalContent from "./pointsTransfer";
 
 const ProgramModalContent = (props) => {
 
+  const memberFormat = props.memberFormat;
+
   const [pointsshow, setPointsShow] = useState(false);
   const handlePointsClose = () => setPointsShow(false);
     
@@ -14,14 +16,35 @@ const ProgramModalContent = (props) => {
 
   const [membershipID, setMembershipID] = useState('');
   const [confirmID, setConfirmID] = useState('');
+
   
-  function handleSubmit(event){
+
+
+  function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh
-    
+    var formatValid = true;
     if(membershipID === confirmID){
-      //show the points transfer modal
-      setPointsShow(true);
-      props.close();  
+      if(memberFormat.length === membershipID.length){
+        for (let j = 0; j < membershipID.length; j++){
+          if(/^[a-zA-Z]+$/.test(memberFormat[j]) && /^[a-zA-Z]+$/.test(membershipID[j])){console.log("letter")}
+          else if(isNaN(memberFormat[j]) && isNaN(membershipID[j])){console.log("number")}
+          else{
+            formatValid = false;
+            break;
+          }
+        }
+        if(formatValid){
+          //show the points transfer modal
+          setPointsShow(true);
+          props.close();  
+        }
+        else{
+          alert("Invalid member format, please check you are entering the correct membership ID, wrong order")
+        }
+      }
+      else{
+        alert("Invalid member format, please check you are entering the correct membership ID, wrong length")
+      }
     }
     else{
       alert("Please check that both IDs are the same.")
@@ -72,7 +95,7 @@ const ProgramModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="primary" type="submit" onClick={HandleSubmit}>
             Save Membership
           </Button>
         </Modal.Footer>

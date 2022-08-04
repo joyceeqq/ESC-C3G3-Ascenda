@@ -10,7 +10,7 @@ let newProgramDetSchema = new Schema({
     exchangeRate: String,
     exchangeTime: String,
     minAmount: Number,
-
+    format: String,
 });
 
 module.exports = myDB.model('detail', newProgramDetSchema);

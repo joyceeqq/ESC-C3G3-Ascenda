@@ -5,56 +5,11 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import Header from "components/Headers/Header.js";
 import ProgramModalContent from 'components/Modals/membershipDets';
 
-export const userName = "Jessica Jones";
-export let numberPoints = 1500;
+export const userName = "Gerard Tan";
+export let numberPoints = 500;
 export function setNumberPoints(value){
   numberPoints -= value;
 }
-
-// const cardInfo = [
-//   {
-//     image: "https://images.prismic.io/ascendaloyaltycorp/74725b6f-2f69-41d4-94a2-67c4ea3cf01c_Ascenda_Clients_Barclays.png?auto=compress,format",
-//     companyName: "Barclays",
-//     exchangeRate: "1400  points to 400  miles",
-//     exchangeTime:"4  to  6  hours",
-//     minAmount:"1400 points",
-//   },
-//   {
-//     image: "https://images.prismic.io/ascendaloyaltycorp/66e6be5f-3b81-42ea-982d-808685e99fed_Ascenda_Clients_SingaporeAirlines.png?auto=compress,format",
-//     companyName: "Singapore Airlines KrisFlyer",
-//     exchangeRate: "1400  points to 400  miles", 
-//     exchangeTime:"4  to  6  hours",
-//     minAmount:"1400 points",
-//   },
-//   {
-//     image: "https://images.prismic.io/ascendaloyaltycorp/8e6b6276-1c52-4834-a468-ee22e01980c8_Ascenda_Clients_Qantas.png?auto=compress,format",
-//     companyName: "Qantas",
-//     exchangeRate: "1400  points to 400  miles",
-//     exchangeTime:"4  to  6  hours",
-//     minAmount:"1400 points",
-//   },
-//   {
-//     image: "https://images.prismic.io/ascendaloyaltycorp/80adf324-2fac-4c63-bf75-7d848ddf6738_Ascenda_Clients_MarriottBonvoy.png?auto=compress,format",
-//     companyName: "Marriott Bonvoy",
-//     exchangeRate: "1400  points to 400  miles",
-//     exchangeTime:"4  to  6  hours",
-//     minAmount:"1400 points",
-//   },
-//   {
-//     image: "https://images.prismic.io/ascendaloyaltycorp/1a2ee1c1-be35-48e9-8c79-8bab7a89351f_2.png?auto=compress,format",
-//     companyName: "Finnair Plus",
-//     exchangeRate: "1400  points to 400  miles",
-//     exchangeTime:"4  to  6  hours",
-//     minAmount:"1400 points",
-//   },
-//   {
-//     image: "https://images.prismic.io/ascendaloyaltycorp/3a430f69-57ab-445c-bee1-3e1612ead7ec_Expedia-Logo.wine.png?auto=compress,format",
-//     companyName: "Expedia",
-//     exchangeRate: "1400  points to 400  miles",
-//     exchangeTime:"4  to  6  hours",
-//     minAmount:"1400 points",
-//   },
-// ];
 
 const CardDetails = () => {
 
@@ -62,6 +17,7 @@ const CardDetails = () => {
   const handleClose = () => setShow(false);
 
   const [programs, setPrograms] = useState(null)
+  const [memberFormat, setMemberFormat] = useState("")
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -75,7 +31,7 @@ const CardDetails = () => {
     }
     fetchPrograms()
   }, [])
-//key={k} 
+
   const [chosenCompany, setChosenCompany] = useState("");
   
     return (
@@ -85,8 +41,8 @@ const CardDetails = () => {
       <br></br>
         <div>
             <Row>
-                {programs && programs.map((program) => (
-                    <Col xs={10} md={3} lg={5}> 
+                {programs && programs.map((program, k) => (
+                    <Col key={k} xs={10} md={3} lg={5}> 
                         <Card >
                             <Card.Img src={program.image} />
                             <Card.Body>
@@ -96,8 +52,9 @@ const CardDetails = () => {
                                 <Card.Text>Minimum Exchange Amount: <br></br> {program.minAmount}</Card.Text>
                                 <Button id={program.companyName.trim()} variant="primary" onClick={() => {
                                   setChosenCompany(program.companyName);
-                                  setShow(true)
-                                }}>Transfer</Button>
+                                  setShow(true);
+                                  setMemberFormat(program.format)
+                                  }}>Transfer</Button>
                                 <br></br>
                             </Card.Body>
                             <br></br>
@@ -107,7 +64,7 @@ const CardDetails = () => {
                     
                 ))}
             </Row>
-            <ProgramModalContent show={show} close={handleClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints}/>
+            <ProgramModalContent show={show} close={handleClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints} memberFormat={memberFormat}/>
         </div>
         
       </>
