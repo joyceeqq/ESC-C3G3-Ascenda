@@ -35,4 +35,25 @@ const putDataToSFTP = (data, remote) => {
   });
 }
 
-module.exports = {connectToSFTP, putDataToSFTP}
+const getDataFromSFTP = (remotePath, localDstPath) => {
+  client.connect(config)
+  .then(() => {
+    return client.get(remotePath, localDstPath);
+  })
+  .then(() => {
+    client.end();
+  })
+  .catch(err => {
+    console.error(err.message);
+  });
+}
+
+const getRecentHandbackFileName = (partnerCode, currentDate) => {
+  currentDate = currentDate.toISOString().substring(0,10);
+  currentDate = currentDate.replaceAll('-', '_');
+  let handbackFileName = partnerCode + currentDate + ".HANDBACK.csv";
+
+  return handbackFileName;
+}
+
+module.exports = {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName}

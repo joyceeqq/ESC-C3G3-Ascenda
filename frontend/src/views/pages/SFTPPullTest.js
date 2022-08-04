@@ -24,11 +24,11 @@ import { Card, Container, Row } from "reactstrap";
 import Header from "components/Headers/Header.js"; 
 
 
-const Maps = () => {
+const SFTPPull = () => {
 
   useEffect(() => {
     const fetchPrograms = async () => {
-      const response = await fetch('/admin/sendsftp')
+      const response = await fetch('/admin/pullsftp')
       const json  = await response.json()
       console.log(json)
 
@@ -55,4 +55,4 @@ const Maps = () => {
   );
 };
 
-export default Maps;
+export default SFTPPull;

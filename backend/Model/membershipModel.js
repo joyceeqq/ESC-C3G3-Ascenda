@@ -11,6 +11,7 @@ let newMemberSchema = new Schema({
     transactionDate: Date,
     refNumber: Number,
     amount: Number,
+    
 });
 
 module.exports = myDB.model('member', newMemberSchema);

@@ -5,7 +5,8 @@ import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
 import CardDetails from "views/pages/Redeem";
 import AddProgram from "views/pages/AddProgram";
-import Maps from "views/pages/Maps";
+import SFTPSend from "views/pages/SFTPSendTest";
+import SFTPPull from "views/pages/SFTPPullTest";
 
 var routes = [
   {
@@ -16,10 +17,17 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/maps",
-    name: "test function",
+    path: "/sftpsend",
+    name: "sftp send test function",
     icon: "ni ni-tv-2 text-primary",
-    component: Maps,
+    component: SFTPSend,
+    layout: "/admin",
+  },
+  {
+    path: "/sftppull",
+    name: "sftp pull test function",
+    icon: "ni ni-tv-2 text-primary",
+    component: SFTPPull,
     layout: "/admin",
   },
   {

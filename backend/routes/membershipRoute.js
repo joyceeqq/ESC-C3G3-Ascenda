@@ -5,7 +5,7 @@ const program = require("./../Model/programModel");
 const programDet = require("./../Model/programDetailModel");
 const transactionDet = require("./../Model/transactionDetailModel");
 const {jsonToCSV, createHeader, createFileName} = require("../Functions/generateTransactionCSV");
-const {connectToSFTP, putDataToSFTP} = require("../sftp");
+const {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName} = require("../sftp");
  
 router.route("/createmember").post((req, res) => {
     const programID = req.body.programID;
@@ -52,13 +52,24 @@ router.route("/admin/redeem").get((req, res) => {
 router.route("/admin/sendsftp").get((req, res) => {
     transactionDet.find({}, '-_id').lean().then(transDocs => {
         let header = createHeader(transDocs[0]);
-        let fileName = "./TransactionCSVs/";
-        fileName += createFileName();
+        let fileName = "./TransactionCSVs/" + createFileName();
         jsonToCSV(header, transDocs, fileName);
 
-        let remoteName = createFileName();
+        let remoteName = "/accrual_handback_dropbox/" + createFileName();
         putDataToSFTP(fileName, remoteName);
     });
+});
+
+router.route("/admin/pullsftp").get((req, res) => {
+    let currentDate = new Date();
+    let handbackFileName = getRecentHandbackFileName("PARTNER_CODE_", currentDate);
+    let remotePath = "/accrual_handback_dropbox/" + handbackFileName;
+    console.log(remotePath);
+    let localPath = "./HandbackFiles/" + handbackFileName;
+    console.log(localPath);
+
+    getDataFromSFTP(remotePath, localPath);
+
 });
 
 module.exports = router;
