@@ -4,8 +4,10 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 // core components
 import Header from "components/Headers/Header.js";
 import ProgramModalContent from 'components/Modals/membershipDets';
+import ProgramDetailsModal from 'components/Modals/programDetailsModal';
 
 export const userName = "Gerard Tan";
+export const partnerCode = "DBSSG";
 export let numberPoints = 500;
 export function setNumberPoints(value){
   numberPoints -= value;
@@ -13,8 +15,26 @@ export function setNumberPoints(value){
 
 const CardDetails = () => {
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  // constants for the transfer modal
+  const [programShow, setProgramShow] = useState(false);
+  const handleProgramClose = () => setProgramShow(false);
+
+  //constants for the program details modal
+  const [programDetsShow, setProgramDetsShow] = useState(false)
+  const handleDetailsClose = () => setProgramDetsShow(false)
+  const [companyDets, setCompanyDets] = useState({
+    LoyaltyProgramName: String,
+    LoyaltyProgramID: String,
+    currencyName: String,
+    processTime: Number,
+    minExAmount: Number,
+    exchangeRate: Number,
+    memberFormat: String,
+    enrollLink: String,
+    tcLink: String,
+    imageLink: String,
+    description: String,
+  })
 
   const [programs, setPrograms] = useState(null)
   const [memberFormat, setMemberFormat] = useState("")
@@ -24,7 +44,6 @@ const CardDetails = () => {
       const response = await fetch('/admin/redeem')
       const json  = await response.json()
       console.log(json)
-
       if (response.ok){
         setPrograms(json)
       }
@@ -44,17 +63,29 @@ const CardDetails = () => {
                 {programs && programs.map((program, k) => (
                     <Col key={k} xs={10} md={3} lg={5}> 
                         <Card >
-                            <Card.Img src={program.image} />
+                            <Card.Img src={program.imageLink} />
                             <Card.Body>
-                                <Card.Title>{program.companyName}</Card.Title>
+                                <Card.Title>{program.LoyaltyProgramName}</Card.Title>
                                 <Card.Text>Exchange Rate: <br></br>{program.exchangeRate}</Card.Text>
-                                <Card.Text>Estimated Transfer Time: <br></br>{program.exchangeTime}</Card.Text>
-                                <Card.Text>Minimum Exchange Amount: <br></br> {program.minAmount}</Card.Text>
-                                <Button id={program.companyName.trim()} variant="primary" onClick={() => {
-                                  setChosenCompany(program.companyName);
-                                  setShow(true);
-                                  setMemberFormat(program.format)
+                                <Card.Text>Estimated Transfer Time: <br></br>{program.processTime}</Card.Text>
+                                <Card.Text>Minimum Exchange Amount: <br></br> {program.minExAmount}</Card.Text>
+                                <Button id={program.LoyaltyProgramName.trim()} variant="primary" onClick={() => {
+                                  setChosenCompany(program.LoyaltyProgramName);
+                                  setProgramShow(true);
+                                  setMemberFormat(program.memberFormat)
                                   }}>Transfer</Button>
+                                <Button id="details" variant="primary" onClick={() => {
+                                  setCompanyDets({LoyaltyProgramName:programs[k].LoyaltyProgramName, 
+                                                  LoyaltyProgramID:programs[k].LoyaltyProgramID,
+                                                  currencyName:programs[k].currencyName,
+                                                  processTime:programs[k].processTime, 
+                                                  minExAmount:programs[k].minExAmount,
+                                                  enrollLink:programs[k].enrollLink,
+                                                  tcLink:programs[k].tcLink,
+                                                  description:programs[k].description,
+                                                  })
+                                  setProgramDetsShow(true);
+                                }}>Details</Button>
                                 <br></br>
                             </Card.Body>
                             <br></br>
@@ -64,7 +95,8 @@ const CardDetails = () => {
                     
                 ))}
             </Row>
-            <ProgramModalContent show={show} close={handleClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints} memberFormat={memberFormat}/>
+            <ProgramModalContent show={programShow} close={handleProgramClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints} memberFormat={memberFormat}/>
+            <ProgramDetailsModal show={programDetsShow} close={handleDetailsClose} companyDets={companyDets}/>
         </div>
         
       </>

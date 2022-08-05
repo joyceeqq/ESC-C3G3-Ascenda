@@ -19,7 +19,6 @@ const ProgramModalContent = (props) => {
 
   
 
-
   function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh
     var formatValid = true;
@@ -27,7 +26,7 @@ const ProgramModalContent = (props) => {
       if(memberFormat.length === membershipID.length){
         for (let j = 0; j < membershipID.length; j++){
           if(/^[a-zA-Z]+$/.test(memberFormat[j]) && /^[a-zA-Z]+$/.test(membershipID[j])){console.log("letter")}
-          else if(isNaN(memberFormat[j]) && isNaN(membershipID[j])){console.log("number")}
+          else if(!isNaN(memberFormat[j]) && !isNaN(membershipID[j])){console.log("number")}
           else{
             formatValid = false;
             break;
