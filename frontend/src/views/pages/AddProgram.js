@@ -22,8 +22,12 @@ const AddProgram = () => {
     const [programID, setProgramID] = useState("GOPOINTS")
     const [programCurrency, setProgramCurrency] = useState("GoPoints")
     const [processTime, setProcessTime] = useState(0)
+    const [minExAmount, setMinExAmount] = useState(0)
+    const [exchangeRate, setExchangeRate] = useState(0)
+    const [memberFormat, setMemberFormat] = useState("123456789a")
     const [enrollLink, setEnrollLink] = useState("https://www.gojet.com/member/")
     const [tcLink, setTCLink] = useState("https://www.gojet.com/aa/about-us/en/gb/terms-and-conditions.html")
+    const [imageLink, setImageLink] = useState("")
     const [description, setDescription] = useState("Company Description")
     
 
@@ -34,9 +38,13 @@ const AddProgram = () => {
             programName: programName,
             programID: programID,
             programCurrency: programCurrency,
-            processTime: processTime ,
+            processTime: processTime,
+            minExAmount: minExAmount,
+            exchangeRate: exchangeRate,
+            memberFormat: memberFormat,
             enrollLink: enrollLink,
             tcLink: tcLink,
+            imageLink: imageLink,
             description: description
         }
 
@@ -46,8 +54,12 @@ const AddProgram = () => {
         setProgramID("GOPOINTS");
         setProgramCurrency("GoPoints");
         setProcessTime(0);
+        setMinExAmount(0);
+        setExchangeRate(0);
+        setMemberFormat("123456789a");
         setEnrollLink("https://www.gojet.com/member/");
         setTCLink("https://www.gojet.com/aa/about-us/en/gb/terms-and-conditions.html");
+        setImageLink("");
         setDescription("Company Description");
     } 
 
@@ -141,6 +153,63 @@ const AddProgram = () => {
                             </FormGroup>
                         </Col>
                         </Row>
+                        <Row>
+                        <Col lg="6">
+                            <FormGroup>
+                                <label
+                                className="form-control-label"
+                                htmlFor="input-min-exchange-amount-time"
+                                >
+                                Minimum Exchange Amount
+                                </label>
+                                <Input
+                                className="form-control-alternative"
+                                id="input-min-exchange-amount-time"
+                                placeholder={minExAmount}
+                                pattern="[0-9]*"
+                                type="number"
+                                onChange={event => setMinExAmount(event.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col lg="6">
+                            <FormGroup>
+                                <label
+                                className="form-control-label"
+                                htmlFor="input-exchange-rate-time"
+                                >
+                                Exchange Rate (to 100 Reward Points)
+                                </label>
+                                <Input
+                                className="form-control-alternative"
+                                id="input-exchange-rate-time"
+                                placeholder={exchangeRate}
+                                pattern="[0-9]*"
+                                type="number"
+                                onChange={event => setExchangeRate(event.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        </Row>
+                        <Row>
+                        <Col lg="6">
+                            <FormGroup>
+                                <label
+                                className="form-control-label"
+                                htmlFor="input-member-format-time"
+                                >
+                                Member format
+                                </label>
+                                <Input
+                                className="form-control-alternative"
+                                id="input-member-format-time"
+                                placeholder={memberFormat}
+                                type="text"
+                                onChange={event => setMemberFormat(event.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        </Row>
                     </div>
                     <hr className="my-4" />
                     <h6 className="heading-small text-muted mb-4">
@@ -181,6 +250,23 @@ const AddProgram = () => {
                                 placeholder={tcLink}
                                 type="link"
                                 onChange={event => setTCLink(event.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md="12">
+                            <FormGroup>
+                                <label
+                                className="form-control-label"
+                                htmlFor="input-image-link"
+                                >
+                                Company Logo Image Link
+                                </label>
+                                <Input
+                                className="form-control-alternative"
+                                id="input-image-link"
+                                placeholder={imageLink}
+                                type="link"
+                                onChange={event => setImageLink(event.target.value)}
                                 />
                             </FormGroup>
                         </Col>

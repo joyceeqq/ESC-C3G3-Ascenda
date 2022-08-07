@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const member = require("./../Model/membershipModel");
+const transferReq = require("./../Model/transactionDetailModel");
 const program = require("./../Model/programModel");
 const programDet = require("./../Model/programDetailModel");
 const transactionDet = require("./../Model/transactionDetailModel");
@@ -8,21 +8,25 @@ const {jsonToCSV, createHeader, createFileName} = require("../Functions/generate
 const {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName} = require("../sftp");
  
 router.route("/createmember").post((req, res) => {
-    const programID = req.body.programID;
-    const memberID = req.body.memberID;
-    const memberName = req.body.memberName;
-    const transactionDate = req.body.transactionDate;
-    const refNumber = req.body.refNumber;
-    const amount = req.body.amount;
-    const newMember = new member({
-        LoyaltyProgramID: programID,
-        membershipID: memberID,
-        memberName: memberName,
-        transactionDate: transactionDate,
-        refNumber: refNumber,
-        amount: amount,
+    const LoyaltyProgramID = req.body.LoyaltyProgramID;
+    const MemberID = req.body.MemberID;
+    const MemberName = req.body.MemberName;
+    const TransferDate = req.body.TransferDate;
+    const ReferenceCode = req.body.ReferenceCode;
+    const PartnerCode = req.body.PartnerCode;
+    const OutcomeCode = req.body.OutcomeCode;
+    const Amount = req.body.Amount;
+    const newTransferReq = new transferReq({
+        LoyaltyProgramID: LoyaltyProgramID,
+        MemberID: MemberID,
+        MemberName: MemberName,
+        TransferDate: TransferDate,
+        ReferenceCode: ReferenceCode,
+        PartnerCode: PartnerCode,
+        OutcomeCode: OutcomeCode,
+        Amount: Amount,
     });
-    newMember.save();
+    newTransferReq.save();
 })
 
 router.route("/createprogram").post((req, res) => {
@@ -30,23 +34,31 @@ router.route("/createprogram").post((req, res) => {
     const programName = req.body.programName;
     const currencyName = req.body.currencyName;
     const processTime = req.body.processTime;
+    const minExAmount = req.body.minExAmount;
+    const exchangeRate = req.body.exchangeRate;
+    const memberFormat = req.body.memberFormat;
     const enrollLink = req.body.enrollLink;
     const tcLink = req.body.tcLink;
+    const imageLink = req.body.imageLink;
     const description = req.body.description;
     const newProgram = new program({
         LoyaltyProgramID: programID,
         LoyaltyProgramName: programName,
         currencyName: currencyName,
         processTime: processTime,
+        minExAmount: minExAmount,
+        exchangeRate: exchangeRate,
+        memberFormat: memberFormat,
         enrollLink: enrollLink,
         tcLink: tcLink,
+        imageLink: imageLink,
         description: description
     });
     newProgram.save();
 })
 
 router.route("/admin/redeem").get((req, res) => {
-    programDet.find().then(foundPrograms => res.json(foundPrograms))
+    program.find().then(foundPrograms => res.json(foundPrograms))
 })
 
 router.route("/admin/sendsftp").get((req, res) => {

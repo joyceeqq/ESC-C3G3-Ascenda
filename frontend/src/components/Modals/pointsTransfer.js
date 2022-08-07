@@ -1,7 +1,7 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState } from 'react';
 import axios from "axios";
-import { numberPoints, setNumberPoints } from "views/pages/Redeem";
+import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
 
 const PointsModalContent = (props) => {
@@ -9,29 +9,36 @@ const PointsModalContent = (props) => {
     const chosenCompany = props.chosenCompany;
     const membershipID = props.membershipID;
     const [pointsToTransfer, setPointsToTransfer] = useState(0);
-    const [pointsshow, setPointsShow] = useState(false);
-    const handlePointsClose = () => setPointsShow(false);
+
+    //state of confirmation modal
+    const [pointsConfirmShow, setPointsConfirmShow] = useState(false);
+    const handlePointsClose = () => setPointsConfirmShow(false);
+    const [confirmRefNumber, setConfirmRefNumber] = useState("");
 
     const handleSubmit = event => {
       setNumberPoints(pointsToTransfer);
       event.preventDefault(); // prevent page refresh 
+      const refNumber = new Date().toISOString()
+      setConfirmRefNumber(refNumber)
   
       // access input values here
-      const newMember= {
-        programID: chosenCompany,
-        memberID: membershipID,
-        memberName: userName,
-        transactionDate: new Date(),
-        refNumber: 1,
-        amount: pointsToTransfer
+      const newTransferReq= {
+        LoyaltyProgramID: chosenCompany,
+        MemberID: membershipID,
+        MemberName: userName,
+        TransferDate: new Date(),
+        ReferenceCode: refNumber,
+        PartnerCode: partnerCode,
+        OutcomeCode: "Pending",
+        Amount: pointsToTransfer
       }
   
-      axios.post('http://localhost:3001/createmember', newMember);
+      axios.post('http://localhost:3001/createmember', newTransferReq);
       // clear all input values in the form
       setPointsToTransfer(0);
       props.clearMemIDFields();
       props.close();
-      setPointsShow(true);
+      setPointsConfirmShow(true);
     };
 
     return (
@@ -48,6 +55,7 @@ const PointsModalContent = (props) => {
                 <Form.Label>Total Rewards to Transfer</Form.Label>
                 <Form.Control
                     type="number"
+                    pattern="[0-9]*"
                     autoFocus
                     value={pointsToTransfer}
                     onChange={event=> setPointsToTransfer(event.target.value)}
@@ -61,7 +69,7 @@ const PointsModalContent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsConfirm show={pointsshow} close={handlePointsClose}  />
+      <PointsConfirm show={pointsConfirmShow} close={handlePointsClose}  confirmRefNumber={confirmRefNumber}/>
      </div>
     )
   }

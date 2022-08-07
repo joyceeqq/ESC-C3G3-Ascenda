@@ -7,12 +7,11 @@ let newTransactionSchema = new Schema({
     LoyaltyProgramID: String,
     MemberID: String,
     MemberName: String,
-    TransferDate: String,
+    TransferDate: Date,
     Amount: Number,
-    ReferenceCode: Number,
+    ReferenceCode: String,
     PartnerCode: String,
-    OutcomeCode: String  
-
+    OutcomeCode: String 
 });
 
-module.exports = myDB.model('docs', newTransactionSchema);
+module.exports = myDB.model('transfer', newTransactionSchema);
