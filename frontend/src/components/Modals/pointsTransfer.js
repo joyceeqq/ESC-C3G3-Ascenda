@@ -5,41 +5,59 @@ import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
 
 const PointsModalContent = (props) => {
-    const userName = props.userName;
-    const chosenCompany = props.chosenCompany;
-    const membershipID = props.membershipID;
-    const [pointsToTransfer, setPointsToTransfer] = useState(0);
 
-    //state of confirmation modal
-    const [pointsConfirmShow, setPointsConfirmShow] = useState(false);
-    const handlePointsClose = () => setPointsConfirmShow(false);
-    const [confirmRefNumber, setConfirmRefNumber] = useState("");
+  const userName = props.userName;
+  const chosenCompany = props.chosenCompany;
+  const minExAmount = props.minExAmount;
+  const membershipID = props.membershipID;
+  const [pointsToTransfer, setPointsToTransfer] = useState(0);
 
-    const handleSubmit = event => {
-      setNumberPoints(pointsToTransfer);
-      event.preventDefault(); // prevent page refresh 
-      const refNumber = new Date().toISOString()
-      setConfirmRefNumber(refNumber)
-  
-      // access input values here
-      const newTransferReq= {
-        LoyaltyProgramID: chosenCompany,
-        MemberID: membershipID,
-        MemberName: userName,
-        TransferDate: new Date(),
-        ReferenceCode: refNumber,
-        PartnerCode: partnerCode,
-        OutcomeCode: "Pending",
-        Amount: pointsToTransfer
+  //state of confirmation modal
+  const [pointsConfirmShow, setPointsConfirmShow] = useState(false);
+  const handlePointsClose = () => setPointsConfirmShow(false);
+  const [confirmRefNumber, setConfirmRefNumber] = useState("");
+
+  function handleSubmit(event){
+    event.preventDefault(); // prevent page refresh 
+    console.log(pointsToTransfer);
+    for (let j = 0; j < pointsToTransfer.length; j++){
+      console.log("for loop running")
+      if(isNaN(pointsToTransfer[j])){
+        alert("Please only key in a whole number!")
+        return;
       }
-  
-      axios.post('http://localhost:3001/createmember', newTransferReq);
-      // clear all input values in the form
-      setPointsToTransfer(0);
-      props.clearMemIDFields();
-      props.close();
-      setPointsConfirmShow(true);
-    };
+    }
+    if (parseInt(pointsToTransfer)> numberPoints){
+      alert("You have insufficient number of points!");
+      return;
+    }
+    if (parseInt(pointsToTransfer) < minExAmount){
+      alert("Please transfer more than the minimum exchange amount: " + minExAmount);
+      return;
+    }
+    setNumberPoints(pointsToTransfer);
+    const refNumber = new Date().toISOString()
+    setConfirmRefNumber(refNumber)
+
+    // access input values here
+    const newTransferReq= {
+      LoyaltyProgramID: chosenCompany,
+      MemberID: membershipID,
+      MemberName: userName,
+      TransferDate: new Date(),
+      ReferenceCode: refNumber,
+      PartnerCode: partnerCode,
+      OutcomeCode: "Pending",
+      Amount: pointsToTransfer
+    }
+
+    axios.post('http://localhost:3001/createmember', newTransferReq);
+    // clear all input values in the form
+    setPointsToTransfer(0);
+    props.clearMemIDFields();
+    props.close();
+    setPointsConfirmShow(true);
+  };
 
     return (
       <div>
@@ -54,8 +72,7 @@ const PointsModalContent = (props) => {
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Total Rewards to Transfer</Form.Label>
                 <Form.Control
-                    type="number"
-                    pattern="[0-9]*"
+                    type="text"
                     autoFocus
                     value={pointsToTransfer}
                     onChange={event=> setPointsToTransfer(event.target.value)}
@@ -64,7 +81,7 @@ const PointsModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="primary" type="submit" onClick={handleSubmit} onKeyPress>
             Complete Transfer
           </Button>
         </Modal.Footer>
