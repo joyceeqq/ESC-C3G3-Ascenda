@@ -23,7 +23,7 @@ const connectToSFTP = () => {
 }
 
 const putDataToSFTP = (data, remote) => {
-  client.connect(config)
+  client.connect(config, 'once')
   .then(() => {
     return client.put(data, remote);
   })
@@ -36,13 +36,29 @@ const putDataToSFTP = (data, remote) => {
 }
 
 const getDataFromSFTP = (remotePath, localDstPath) => {
-  client.connect(config)
+  client.connect(config, 'once')
   .then(() => {
     return client.get(remotePath, localDstPath);
   })
   .then(() => {
     client.end();
   })
+  .catch(err => {
+    console.error(err.message);
+  });
+}
+
+const checkHandbackExists = (remotePath) => {
+  return client.connect(config, 'once')
+  .then(() => {
+    return client.exists(remotePath);
+  })
+  .then(data => {
+    return data
+  })
+  //.then(() => {
+  //  client.end();
+  //})
   .catch(err => {
     console.error(err.message);
   });
@@ -56,4 +72,4 @@ const getRecentHandbackFileName = (partnerCode, currentDate) => {
   return handbackFileName;
 }
 
-module.exports = {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName}
+module.exports = {connectToSFTP, putDataToSFTP, getDataFromSFTP, checkHandbackExists, getRecentHandbackFileName}

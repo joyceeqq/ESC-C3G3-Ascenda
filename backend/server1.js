@@ -17,8 +17,15 @@ app.listen(3001, function(){
     
 })
 
+const {pollForHandbackUpdate} = require('./Functions/sftpPushPollInterval.js');
+var pollInterval = setInterval(function() 
+{
+    pollForHandbackUpdate(pollInterval);
+}, 5000);
+
+
 // const express=require("express")
-  
+
 // // Importing all the routes
 // const memberRoute=require("./routes/membershipRoute")
 // const programRoute=require("./routes/programRoute")
