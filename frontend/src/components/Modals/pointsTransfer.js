@@ -19,7 +19,6 @@ const PointsModalContent = (props) => {
 
   function handleSubmit(event){
     event.preventDefault(); // prevent page refresh 
-    console.log(pointsToTransfer);
     for (let j = 0; j < pointsToTransfer.length; j++){
       console.log("for loop running")
       if(isNaN(pointsToTransfer[j])){
@@ -59,9 +58,15 @@ const PointsModalContent = (props) => {
     setPointsConfirmShow(true);
   };
 
+  function preventRefresh(event){
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+}
+
     return (
       <div>
-      <Modal show={props.show} onHide={props.close}>
+      <Modal show={props.show} onHide={props.close} onKeyPress={preventRefresh}>
         <Modal.Header closeButton>
           <Modal.Title>Transfer Your Miles</Modal.Title><br></br>
         </Modal.Header>
@@ -81,7 +86,7 @@ const PointsModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleSubmit} onKeyPress>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
             Complete Transfer
           </Button>
         </Modal.Footer>
