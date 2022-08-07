@@ -17,7 +17,7 @@ const ProgramModalContent = (props) => {
   const [membershipID, setMembershipID] = useState('');
   const [confirmID, setConfirmID] = useState('');
 
-  
+  const minExAmount = props.minExAmount;  
 
   function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh
@@ -85,7 +85,6 @@ const ProgramModalContent = (props) => {
                 <Form.Label>Confirm Membership#</Form.Label>
                 <Form.Control
                     type="text"
-                    autoFocus
                     onChange={event => setConfirmID(event.target.value)}
                     name="confirmID"
                     value={confirmID}
@@ -99,7 +98,7 @@ const ProgramModalContent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName} clearMemIDFields={clearMemIDFields}/>
+      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName} clearMemIDFields={clearMemIDFields} minExAmount={minExAmount}/>
     </div>
     )
   }

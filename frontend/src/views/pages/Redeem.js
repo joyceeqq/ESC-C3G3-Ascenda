@@ -8,7 +8,7 @@ import ProgramDetailsModal from 'components/Modals/programDetailsModal';
 
 export const userName = "Gerard Tan";
 export const partnerCode = "DBSSG";
-export let numberPoints = 500;
+export let numberPoints = 1000;
 export function setNumberPoints(value){
   numberPoints -= value;
 }
@@ -36,8 +36,9 @@ const CardDetails = () => {
     description: String,
   })
 
-  const [programs, setPrograms] = useState(null)
-  const [memberFormat, setMemberFormat] = useState("")
+  const [programs, setPrograms] = useState(null);
+  const [memberFormat, setMemberFormat] = useState("");
+  const [minExAmount, setMinExAmount] = useState(0);
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -70,6 +71,7 @@ const CardDetails = () => {
                                 <Card.Text>Estimated Transfer Time: <br></br>{program.processTime}</Card.Text>
                                 <Card.Text>Minimum Exchange Amount: <br></br> {program.minExAmount}</Card.Text>
                                 <Button id={program.LoyaltyProgramName.trim()} variant="primary" onClick={() => {
+                                  setMinExAmount(program.minExAmount);
                                   setChosenCompany(program.LoyaltyProgramName);
                                   setProgramShow(true);
                                   setMemberFormat(program.memberFormat)
@@ -95,7 +97,7 @@ const CardDetails = () => {
                     
                 ))}
             </Row>
-            <ProgramModalContent show={programShow} close={handleProgramClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints} memberFormat={memberFormat}/>
+            <ProgramModalContent show={programShow} close={handleProgramClose} userName={userName} chosenCompany={chosenCompany} numberPoints={numberPoints} memberFormat={memberFormat} minExAmount={minExAmount}/>
             <ProgramDetailsModal show={programDetsShow} close={handleDetailsClose} companyDets={companyDets}/>
         </div>
         
