@@ -6,6 +6,9 @@ const programDet = require("./../Model/programDetailModel");
 const transactionDet = require("./../Model/transactionDetailModel");
 const {jsonToCSV, createHeader, createFileName} = require("../Functions/generateTransactionCSV");
 const {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName} = require("../sftp");
+
+var now = new Date();
+var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
  
 router.route("/createmember").post((req, res) => {
     const LoyaltyProgramID = req.body.LoyaltyProgramID;
@@ -60,6 +63,11 @@ router.route("/createprogram").post((req, res) => {
 router.route("/admin/redeem").get((req, res) => {
     program.find().then(foundPrograms => res.json(foundPrograms))
 })
+
+router.route("/admin/transfers").get((req, res) => {
+    transferReq.find().then(foundTransfers => res.json(foundTransfers))
+})
+
 
 router.route("/admin/sendsftp").get((req, res) => {
     transactionDet.find({}, '-_id').lean().then(transDocs => {

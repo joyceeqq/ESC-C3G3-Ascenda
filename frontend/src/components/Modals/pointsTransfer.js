@@ -1,5 +1,5 @@
 import { Button, Modal, Form } from "react-bootstrap";
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import axios from "axios";
 import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
@@ -17,11 +17,26 @@ const PointsModalContent = (props) => {
   const handlePointsClose = () => setPointsConfirmShow(false);
   const [confirmRefNumber, setConfirmRefNumber] = useState("");
 
-  function handleSubmit(event){
+  //number of transactions today
+  const [numTransfers, setNumTransfers] = useState(0);
+
+  useEffect(() => {
+    const fetchTransfers = async () => {
+      const response = await fetch('/admin/transfers')
+      const json  = await response.json()
+      console.log("programs today")
+      console.log(json)
+      
+    }
+    fetchTransfers()
+  }, [])
+
+  function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh 
-    console.log(pointsToTransfer);
+
+    
+
     for (let j = 0; j < pointsToTransfer.length; j++){
-      console.log("for loop running")
       if(isNaN(pointsToTransfer[j])){
         alert("Please only key in a whole number!")
         return;
@@ -36,6 +51,9 @@ const PointsModalContent = (props) => {
       return;
     }
     setNumberPoints(pointsToTransfer);
+
+    
+
     const refNumber = new Date().toISOString()
     setConfirmRefNumber(refNumber)
 
@@ -81,7 +99,7 @@ const PointsModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleSubmit} onKeyPress>
+          <Button variant="primary" type="submit" onClick={HandleSubmit}>
             Complete Transfer
           </Button>
         </Modal.Footer>
