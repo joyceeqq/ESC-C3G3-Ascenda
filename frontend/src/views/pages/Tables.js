@@ -16,7 +16,7 @@ const [history, setHistory] = useState(null);
 
 useEffect(() => {
   const fetchTransfers = async () => {
-    const response = await fetch('/admin/transfers')
+    const response = await fetch('/admin/history')
     const json  = await response.json()
     console.log(json)
     if (response.ok){

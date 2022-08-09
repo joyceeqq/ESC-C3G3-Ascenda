@@ -178,7 +178,7 @@ const AddProgram = () => {
                                 className="form-control-label"
                                 htmlFor="input-exchange-rate-time"
                                 >
-                                Exchange Rate (to 100 Reward Points)
+                                Exchange Rate
                                 </label>
                                 <Input
                                 className="form-control-alternative"

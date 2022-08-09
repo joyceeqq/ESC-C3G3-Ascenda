@@ -64,8 +64,12 @@ router.route("/admin/redeem").get((req, res) => {
     program.find().then(foundPrograms => res.json(foundPrograms))
 })
 
-router.route("/admin/transfers").get((req, res) => {
+router.route("/admin/history").get((req, res) => {
     transferReq.find().then(foundTransfers => res.json(foundTransfers))
+})
+
+router.route("/admin/transfers").get((req, res) => {
+    transferReq.find({TransferDate: {$gte: startOfToday}}).then(foundTransfers => res.json(foundTransfers))
 })
 
 

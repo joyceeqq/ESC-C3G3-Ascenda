@@ -68,7 +68,7 @@ const CardDetails = () => {
                             <Card.Body>
                                 <Card.Title>{program.LoyaltyProgramName}</Card.Title>
                                 <Card.Text>Exchange Rate: <br></br>{program.exchangeRate}</Card.Text>
-                                <Card.Text>Estimated Transfer Time: <br></br>{program.processTime}</Card.Text>
+                                <Card.Text>Estimated Transfer Time: <br></br>{program.processTime} hours</Card.Text>
                                 <Card.Text>Minimum Exchange Amount: <br></br> {program.minExAmount}</Card.Text>
                                 <Button id={program.LoyaltyProgramName.trim()} variant="primary" onClick={() => {
                                   setMinExAmount(program.minExAmount);

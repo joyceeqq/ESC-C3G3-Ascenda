@@ -5,7 +5,7 @@ import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
 
 const PointsModalContent = (props) => {
-
+  // details for transfer document
   const userName = props.userName;
   const chosenCompany = props.chosenCompany;
   const minExAmount = props.minExAmount;
@@ -17,25 +17,14 @@ const PointsModalContent = (props) => {
   const handlePointsClose = () => setPointsConfirmShow(false);
   const [confirmRefNumber, setConfirmRefNumber] = useState("");
 
-  //number of transactions today
-  const [numTransfers, setNumTransfers] = useState(0);
+  async function fetchTransfers(){
+    const response = await fetch('/admin/transfers');
+    const json  = await response.json();
+    return Object.keys(json).length;
+  }
 
-  useEffect(() => {
-    const fetchTransfers = async () => {
-      const response = await fetch('/admin/transfers')
-      const json  = await response.json()
-      console.log("programs today")
-      console.log(json)
-      
-    }
-    fetchTransfers()
-  }, [])
-
-  function HandleSubmit(event){
+  async function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh 
-
-    
-
     for (let j = 0; j < pointsToTransfer.length; j++){
       if(isNaN(pointsToTransfer[j])){
         alert("Please only key in a whole number!")
@@ -50,12 +39,13 @@ const PointsModalContent = (props) => {
       alert("Please transfer more than the minimum exchange amount: " + minExAmount);
       return;
     }
+    var numTransfers;
+    await fetchTransfers().then(number => numTransfers = number);
     setNumberPoints(pointsToTransfer);
-
     
-
-    const refNumber = new Date().toISOString()
-    setConfirmRefNumber(refNumber)
+    var refDate = new Date().toISOString().replace('-', '').split('T')[0].replace('-', '');
+    refDate += (numTransfers+1).toString()
+    setConfirmRefNumber(refDate);
 
     // access input values here
     const newTransferReq= {
@@ -63,7 +53,7 @@ const PointsModalContent = (props) => {
       MemberID: membershipID,
       MemberName: userName,
       TransferDate: new Date(),
-      ReferenceCode: refNumber,
+      ReferenceCode: refDate,
       PartnerCode: partnerCode,
       OutcomeCode: "Pending",
       Amount: pointsToTransfer
