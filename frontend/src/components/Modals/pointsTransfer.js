@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import { partnerCode } from "views/pages/Redeem";
 import Header from "components/Headers/Header.js";
-import PointsConfirm from "./confirmation";
+import PointsConfirm from "./Confirmation";
 
 const PointsModalContent = (props) => {
   // details for transfer document
