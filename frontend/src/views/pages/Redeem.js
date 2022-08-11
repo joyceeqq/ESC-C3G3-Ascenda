@@ -2,9 +2,9 @@ import React, {useState, useEffect } from 'react'
 import { Card, Row, Col, Button } from "react-bootstrap";
 
 // core components
-import Header from "components/Headers/Header.js";
-import ProgramModalContent from 'components/Modals/membershipDets';
-import ProgramDetailsModal from 'components/Modals/programDetailsModal';
+import Header from "./../../components/Headers/Header.js";
+import ProgramModalContent from './../../components/Modals/membershipDets';
+import ProgramDetailsModal from './../../components/Modals/programDetailsModal';
 
 export const userName = "Gerard Tan";
 export const partnerCode = "DBSSG";

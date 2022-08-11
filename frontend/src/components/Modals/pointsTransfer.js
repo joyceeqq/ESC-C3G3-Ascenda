@@ -1,7 +1,7 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState, useEffect } from 'react';
 import axios from "axios";
-import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
+import { numberPoints, setNumberPoints, partnerCode } from "./../../views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
 import addNotification from 'react-push-notification';
 
