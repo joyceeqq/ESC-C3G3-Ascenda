@@ -105,6 +105,7 @@ describe("progModel Test", () => {
         });
     });
 
+
     // Test schema
     it("create and save progModel sucessfully", async() => {
         const validProgModel = new progModel(progData);
@@ -168,5 +169,12 @@ describe("progModel Test", () => {
         expect(err).toBeInstanceOf(mongoose.Error.ValidationError);
         expect(err.errors.processTime).toBeDefined();
     })
+
+    afterAll(done => {
+        // Closing the DB connection allows Jest to exit successfully.
+        mongoose.connection.close()
+        done()
+    })
+
 })
 
