@@ -67,9 +67,15 @@ const PointsModalContent = (props) => {
     setPointsConfirmShow(true);
   };
 
+  function preventRefresh(event){
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+}
+
     return (
       <div>
-      <Modal show={props.show} onHide={props.close}>
+      <Modal show={props.show} onHide={props.close} onKeyPress={preventRefresh}>
         <Modal.Header closeButton>
           <Modal.Title>Transfer Your Miles</Modal.Title><br></br>
         </Modal.Header>
@@ -90,6 +96,7 @@ const PointsModalContent = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={HandleSubmit}>
+
             Complete Transfer
           </Button>
         </Modal.Footer>
