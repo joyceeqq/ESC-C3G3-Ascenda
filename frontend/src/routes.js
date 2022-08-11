@@ -5,8 +5,6 @@ import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
 import CardDetails from "views/pages/Redeem";
 import AddProgram from "views/pages/AddProgram";
-import SFTPSend from "views/pages/SFTPSendTest";
-import SFTPPull from "views/pages/SFTPPullTest";
 
 var routes = [
   {
@@ -14,20 +12,6 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: Index,
-    layout: "/admin",
-  },
-  {
-    path: "/sftpsend",
-    name: "sftp send test function",
-    icon: "ni ni-tv-2 text-primary",
-    component: SFTPSend,
-    layout: "/admin",
-  },
-  {
-    path: "/sftppull",
-    name: "sftp pull test function",
-    icon: "ni ni-tv-2 text-primary",
-    component: SFTPPull,
     layout: "/admin",
   },
   {

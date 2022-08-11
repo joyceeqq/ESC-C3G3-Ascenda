@@ -1,11 +1,11 @@
 import { Button, Modal, Form } from "react-bootstrap";
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import axios from "axios";
 import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
 
 const PointsModalContent = (props) => {
-
+  // details for transfer document
   const userName = props.userName;
   const chosenCompany = props.chosenCompany;
   const minExAmount = props.minExAmount;
@@ -17,10 +17,15 @@ const PointsModalContent = (props) => {
   const handlePointsClose = () => setPointsConfirmShow(false);
   const [confirmRefNumber, setConfirmRefNumber] = useState("");
 
-  function handleSubmit(event){
+  async function fetchTransfers(){
+    const response = await fetch('/admin/transfers');
+    const json  = await response.json();
+    return Object.keys(json).length;
+  }
+
+  async function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh 
     for (let j = 0; j < pointsToTransfer.length; j++){
-      console.log("for loop running")
       if(isNaN(pointsToTransfer[j])){
         alert("Please only key in a whole number!")
         return;
@@ -34,9 +39,13 @@ const PointsModalContent = (props) => {
       alert("Please transfer more than the minimum exchange amount: " + minExAmount);
       return;
     }
+    var numTransfers;
+    await fetchTransfers().then(number => numTransfers = number);
     setNumberPoints(pointsToTransfer);
-    const refNumber = new Date().toISOString()
-    setConfirmRefNumber(refNumber)
+    
+    var refDate = new Date().toISOString().replace('-', '').split('T')[0].replace('-', '');
+    refDate += (numTransfers+1).toString()
+    setConfirmRefNumber(refDate);
 
     // access input values here
     const newTransferReq= {
@@ -44,7 +53,7 @@ const PointsModalContent = (props) => {
       MemberID: membershipID,
       MemberName: userName,
       TransferDate: new Date(),
-      ReferenceCode: refNumber,
+      ReferenceCode: refDate,
       PartnerCode: partnerCode,
       OutcomeCode: "Pending",
       Amount: pointsToTransfer
@@ -86,7 +95,8 @@ const PointsModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="primary" type="submit" onClick={HandleSubmit}>
+
             Complete Transfer
           </Button>
         </Modal.Footer>

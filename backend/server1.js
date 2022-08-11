@@ -16,3 +16,24 @@ app.use("/", require("./routes/membershipRoute"));
 app.listen(3001, function(){
     
 })
+
+const {pollForHandbackUpdate} = require('./Functions/sftpPushPollInterval.js');
+var pollInterval = setInterval(function() 
+{
+    pollForHandbackUpdate(pollInterval);
+}, 5000);
+
+
+// const express=require("express")
+
+// // Importing all the routes
+// const memberRoute=require("./routes/membershipRoute")
+// const programRoute=require("./routes/programRoute")
+
+  
+// // Handling routes request
+// app.use("/admin/redeem",memberRoute)
+// app.use("/admin/addProgram",loginroute)
+// app.listen((3000),()=>{
+//     console.log("Server is Running")
+// })
