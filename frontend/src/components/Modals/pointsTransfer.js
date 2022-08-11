@@ -3,6 +3,7 @@ import React, {useState, useEffect } from 'react';
 import axios from "axios";
 import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
 import PointsConfirm from "./Confirmation";
+import addNotification from 'react-push-notification';
 
 const PointsModalContent = (props) => {
   // details for transfer document
@@ -47,6 +48,8 @@ const PointsModalContent = (props) => {
     refDate += (numTransfers+1).toString()
     setConfirmRefNumber(refDate);
 
+
+
     // access input values here
     const newTransferReq= {
       LoyaltyProgramID: chosenCompany,
@@ -60,6 +63,12 @@ const PointsModalContent = (props) => {
     }
 
     axios.post('http://localhost:3001/createmember', newTransferReq);
+    addNotification({
+      title: "Bank Client",
+      subtitle: "New transaction",
+      message: "A new transaction is made and added into your transactions.",
+      theme: "light"
+    })
     // clear all input values in the form
     setPointsToTransfer(0);
     props.clearMemIDFields();
@@ -71,7 +80,7 @@ const PointsModalContent = (props) => {
     if (event.key === "Enter") {
       event.preventDefault();
     }
-  }
+  };
 
     return (
       <div>
