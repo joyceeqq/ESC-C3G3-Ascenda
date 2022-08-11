@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const transModel = require("../Model/transactionDetailModel.js");
+
+
 const transData = {
     LoyaltyProgramID: "Barclays",
     MemberID: "1234",
