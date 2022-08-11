@@ -3,7 +3,6 @@ import React, {useState } from 'react';
 import PointsModalContent from "./pointsTransfer";
 
 
-
 const ProgramModalContent = (props) => {
 
   const memberFormat = props.memberFormat;
@@ -13,6 +12,7 @@ const ProgramModalContent = (props) => {
     
   const chosenCompany = props.chosenCompany;
   const userName = props.userName;
+  const numberPoints = props.numberPoints;
 
   const [membershipID, setMembershipID] = useState('');
   const [confirmID, setConfirmID] = useState('');
@@ -98,7 +98,8 @@ const ProgramModalContent = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName} clearMemIDFields={clearMemIDFields} minExAmount={minExAmount}/>
+      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} 
+      userName={userName} numberPoints={numberPoints} clearMemIDFields={clearMemIDFields} minExAmount={minExAmount}/>
     </div>
     )
   }

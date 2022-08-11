@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const transferReq = require("./../Model/transactionDetailModel");
-const program = require("./../Model/programModel");
-const programDet = require("./../Model/programDetailModel");
-const transactionDet = require("./../Model/transactionDetailModel");
+const transferReq = require("../Model/transactionDetailModel");
+const program = require("../Model/programModel");
+const member = require("../Model/memberModel")
+const transactionDet = require("../Model/transactionDetailModel");
 const {jsonToCSV, createHeader, createFileName} = require("../Functions/generateTransactionCSV");
 const {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName} = require("../sftp");
 
@@ -60,8 +60,19 @@ router.route("/createprogram").post((req, res) => {
     newProgram.save();
 })
 
+router.route("/admin/updatepoints").post((req, res) => {
+    const pointsUsed = req.body.points;
+    member.findOneAndUpdate({bankID: "dbs123"}).then(user => {
+        user.numberPoints -= pointsUsed;
+        user.save()})
+})
+
 router.route("/admin/redeem").get((req, res) => {
     program.find().then(foundPrograms => res.json(foundPrograms))
+})
+
+router.route("/admin/memberdetails").get((req, res) => {
+    member.find().then(foundMembers => res.json(foundMembers))
 })
 
 router.route("/admin/history").get((req, res) => {
