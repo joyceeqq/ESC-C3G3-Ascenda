@@ -71,7 +71,7 @@ const PointsModalContent = (props) => {
     if (event.key === "Enter") {
       event.preventDefault();
     }
-}
+  }
 
     return (
       <div>
