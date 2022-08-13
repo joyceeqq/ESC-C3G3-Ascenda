@@ -17,7 +17,6 @@ const pushSchedule = (pushHours, pushMinutes, pushSeconds, pushMiliseconds) =>
 
 const pollForHandbackUpdate = () =>
 {
-
         let remotePath = "/accrual_handback_dropbox/" + getRecentHandbackFileName("PARTNER_CODE_", new Date());
         let handbackExists = checkHandbackExists(remotePath);
         handbackExists.then(function(result) {

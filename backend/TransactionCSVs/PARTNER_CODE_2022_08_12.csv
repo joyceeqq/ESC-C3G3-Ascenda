@@ -1,0 +1,11 @@
+LOYALTYPROGRAMID,MEMBERID,MEMBERNAME,TRANSFERDATE,AMOUNT,REFERENCECODE,PARTNERCODE,OUTCOMECODE,__V
+Barclays,123456789,Jessica Jones,Fri Aug 12 2022 07:32:57 GMT+0800 (Singapore Standard Time),600,202208111,DBSSG,Pending,0
+SUTD,12345,Jessica Jones,Fri Aug 12 2022 07:56:24 GMT+0800 (Singapore Standard Time),500,202208112,DBSSG,Transaction Success,0
+Barclays,681111781,Jessica Jones,Fri Aug 12 2022 08:06:51 GMT+0800 (Singapore Standard Time),500,202208123,DBSSG,Pending,0
+Singapore Airlines KrisFlyer,1596041256,Jessica Jones,Fri Aug 12 2022 08:08:25 GMT+0800 (Singapore Standard Time),500,202208124,DBSSG,Pending,0
+GoJet points,2087749145,Jessica Jones,Fri Aug 12 2022 08:08:37 GMT+0800 (Singapore Standard Time),500,202208125,DBSSG,Pending,0
+SUTD,55555,Jessica Jones,Fri Aug 12 2022 08:18:45 GMT+0800 (Singapore Standard Time),600,202208126,DBSSG,Transaction Success,0
+Barclays,826205420,Jessica Jones,Fri Aug 12 2022 08:22:49 GMT+0800 (Singapore Standard Time),500,202208127,DBSSG,Pending,0
+Singapore Airlines KrisFlyer,3479312132,Jessica Jones,Fri Aug 12 2022 08:24:23 GMT+0800 (Singapore Standard Time),500,202208128,DBSSG,Pending,0
+GoJet points,3344033497,Jessica Jones,Fri Aug 12 2022 08:24:34 GMT+0800 (Singapore Standard Time),500,202208129,DBSSG,Pending,0
+SUTD,333b,Jessica Jones,Fri Aug 12 2022 08:44:59 GMT+0800 (Singapore Standard Time),600,2022081210,DBSSG,Pending,0
