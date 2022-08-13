@@ -1,19 +1,21 @@
 import { Button, Modal, Form } from "react-bootstrap";
-import React, {useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import { numberPoints, setNumberPoints, partnerCode } from "views/pages/Redeem";
-import PointsConfirm from "./Confirmation";
-import addNotification from 'react-push-notification';
+import { partnerCode } from "views/pages/Redeem";
+import Header from "components/Headers/Header.js";
+import PointsConfirm from "./confirmation";
+
 
 const PointsModalContent = (props) => {
   // details for transfer document
   const userName = props.userName;
+  const numberPoints = props.numberPoints;
   const chosenCompany = props.chosenCompany;
   const minExAmount = props.minExAmount;
   const membershipID = props.membershipID;
   const [pointsToTransfer, setPointsToTransfer] = useState(0);
 
-  //state of confirmation modal
+  // state of confirmation modal
   const [pointsConfirmShow, setPointsConfirmShow] = useState(false);
   const handlePointsClose = () => setPointsConfirmShow(false);
   const [confirmRefNumber, setConfirmRefNumber] = useState("");
@@ -42,7 +44,6 @@ const PointsModalContent = (props) => {
     }
     var numTransfers;
     await fetchTransfers().then(number => numTransfers = number);
-    setNumberPoints(pointsToTransfer);
     
     var refDate = new Date().toISOString().replace('-', '').split('T')[0].replace('-', '');
     refDate += (numTransfers+1).toString()
@@ -63,12 +64,12 @@ const PointsModalContent = (props) => {
     }
 
     axios.post('http://localhost:3001/createmember', newTransferReq);
-    addNotification({
-      title: "Bank Client",
-      subtitle: "New transaction",
-      message: "A new transaction is made and added into your transactions.",
-      theme: "light"
-    })
+    
+    const pointsUsed = {
+      points: pointsToTransfer
+    }
+    axios.post('http://localhost:3001/admin/updatepoints', pointsUsed);
+
     // clear all input values in the form
     setPointsToTransfer(0);
     props.clearMemIDFields();
@@ -90,7 +91,7 @@ const PointsModalContent = (props) => {
         </Modal.Header>
         <Modal.Body>
           <p>Transfer your miles to your <b>{chosenCompany}</b> account:<b>{membershipID}</b></p>
-            <p>Available points: {numberPoints}</p>
+            <p>Available points: {Header.numberPoints}</p>
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Total Rewards to Transfer</Form.Label>

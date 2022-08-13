@@ -6,12 +6,7 @@ import Header from "components/Headers/Header.js";
 import ProgramModalContent from 'components/Modals/membershipDets';
 import ProgramDetailsModal from 'components/Modals/programDetailsModal';
 
-export const userName = "Gerard Tan";
 export const partnerCode = "DBSSG";
-export let numberPoints = 1000;
-export function setNumberPoints(value){
-  numberPoints -= value;
-}
 
 const CardDetails = () => {
 
@@ -36,6 +31,7 @@ const CardDetails = () => {
     description: String,
   })
 
+  // getting cardinfo from backend 
   const [programs, setPrograms] = useState(null);
   const [memberFormat, setMemberFormat] = useState("");
   const [minExAmount, setMinExAmount] = useState(0);
@@ -52,11 +48,30 @@ const CardDetails = () => {
     fetchPrograms()
   }, [])
 
+  // getting user info from backend
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [numberPoints, setNumberPoints] = useState(0);
+
+  useEffect(() => {
+    const fetchMember = async () => {
+      const response = await fetch('/admin/memberdetails');
+      const json  = await response.json();
+      console.log(json);
+      if (response.ok){
+        setFirstName(json[0].firstName);
+        setLastName(json[0].lastName);
+        setNumberPoints(json[0].numberPoints);
+      }
+    }
+    fetchMember()
+  }, [])
+  let userName = firstName+" "+lastName;
+
   const [chosenCompany, setChosenCompany] = useState("");
   
     return (
       <>
-      
       <Header />
       <br></br>
         <div>

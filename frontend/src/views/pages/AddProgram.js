@@ -61,6 +61,7 @@ const AddProgram = () => {
         setTCLink("https://www.gojet.com/aa/about-us/en/gb/terms-and-conditions.html");
         setImageLink("");
         setDescription("Company Description");
+        alert("New program has been created!");
     } 
 
     return (
