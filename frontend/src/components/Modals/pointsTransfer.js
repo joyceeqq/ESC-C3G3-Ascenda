@@ -1,9 +1,11 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, {useState} from 'react';
 import axios from "axios";
+
 import { partnerCode } from "views/pages/Redeem";
 import Header from "components/Headers/Header.js";
 import PointsConfirm from "./confirmation";
+
 
 const PointsModalContent = (props) => {
   // details for transfer document
@@ -48,6 +50,8 @@ const PointsModalContent = (props) => {
     refDate += (numTransfers+1).toString()
     setConfirmRefNumber(refDate);
 
+
+
     // access input values here
     const newTransferReq= {
       LoyaltyProgramID: chosenCompany,
@@ -61,11 +65,13 @@ const PointsModalContent = (props) => {
     }
 
     axios.post('http://localhost:3001/createmember', newTransferReq);
+
     
     const pointsUsed = {
       points: pointsToTransfer
     }
     axios.post('http://localhost:3001/admin/updatepoints', pointsUsed);
+
     // clear all input values in the form
     setPointsToTransfer(0);
     props.clearMemIDFields();
@@ -77,7 +83,7 @@ const PointsModalContent = (props) => {
     if (event.key === "Enter") {
       event.preventDefault();
     }
-}
+  };
 
     return (
       <div>
