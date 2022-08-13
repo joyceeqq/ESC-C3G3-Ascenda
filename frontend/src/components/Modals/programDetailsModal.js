@@ -1,5 +1,6 @@
-import {Modal} from "react-bootstrap";
-import React from 'react';
+import { Button, Modal, Form } from "react-bootstrap";
+import React, {useState } from 'react';
+import PointsModalContent from "./pointsTransfer";
 
 const ProgramDetailsModal = (props) => {
 

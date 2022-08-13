@@ -1,26 +1,26 @@
+/*!
+
+=========================================================
+* Argon Dashboard React - v1.2.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-import React, {useState, useEffect } from 'react'
+import { userName, numberPoints } from "views/pages/Redeem";
 
 const Header = () => {
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [numberPoints, setNumberPoints] = useState(0);
-
-  useEffect(() => {
-    const fetchMember = async () => {
-      const response = await fetch('/admin/memberdetails');
-      const json  = await response.json();
-      console.log(json);
-      if (response.ok){
-        setFirstName(json[0].firstName);
-        setLastName(json[0].lastName);
-        setNumberPoints(json[0].numberPoints);
-      }
-    }
-    fetchMember()
-  }, [])
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -39,17 +39,25 @@ const Header = () => {
                           tag="h2"
                           className=" font-weight-bold mb-0"
                         >
-                          Hello {firstName} {lastName}!
+                          Hello {userName}!
                         </CardTitle>
-
+                       
+                        
                       </div>
                       </div>
                       <div className={"h-3/5 w-1/4 flex flex-col"}> 
+
+            
+                       
                         <span className="h4 text-muted mb-0">
                           Number of Points Available : {numberPoints}
                         </span>
                       
                       </div>
+                      
+                   
+                    
+                    
                   </CardBody>
                 </Card>
               </Col>
@@ -62,3 +70,4 @@ const Header = () => {
 };
 
 export default Header;
+
