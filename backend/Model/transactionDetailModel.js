@@ -14,4 +14,4 @@ let newTransactionSchema = new Schema({
     OutcomeCode: String 
 });
 
-module.exports = myDB.model('transfer', newTransactionSchema);
+module.exports = myDB.model('transfer', newTransactionSchema, 'transferReqs');

@@ -19,7 +19,7 @@ const ProgramModalContent = (props) => {
 
   const minExAmount = props.minExAmount;  
 
-  function HandleSubmit(event){
+  function MembershipValidation(event){
     event.preventDefault(); // prevent page refresh
     var formatValid = true;
     if(membershipID === confirmID){
@@ -93,7 +93,7 @@ const ProgramModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={HandleSubmit}>
+          <Button variant="primary" type="submit" onClick={MembershipValidation}>
             Save Membership
           </Button>
         </Modal.Footer>
