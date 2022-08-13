@@ -1,5 +1,5 @@
-const outcome=0001;
-const confirmationCode="245567";
+const outcome=0000;
+const confirmationCode="2022081210";
 
   const nodemailer = require('nodemailer');
   let transporter = nodemailer.createTransport({
@@ -14,7 +14,7 @@ const confirmationCode="245567";
     from: "server@gmail.com",
     to: "jessicajones@email.com",
     subject: "Subject",
-    text: "Your Transaction is Successful!"
+    text: "Your Transaction (2022081210) is Successful!"
 }
 message1 = {
     from: "server@gmail.com",
