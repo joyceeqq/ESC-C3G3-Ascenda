@@ -11,7 +11,7 @@ app.use(express.json());
 mongoose.connect('mongodb+srv://joyceeqq:Salty1978@expenses.iwtkw.mongodb.net/', { useNewUrlParser: true });
 
 //require routes
-app.use("/", require("./routes/Route"));
+app.use("/", require("./routes/membershipRoute"));
 
 
 app.listen(3001, function(){
@@ -46,3 +46,17 @@ var dailyPoll = setInterval(function()
 
 
 }, 5000);
+
+// const express=require("express")
+
+// // Importing all the routes
+// const memberRoute=require("./routes/membershipRoute")
+// const programRoute=require("./routes/programRoute")
+
+  
+// // Handling routes request
+// app.use("/admin/redeem",memberRoute)
+// app.use("/admin/addProgram",loginroute)
+// app.listen((3000),()=>{
+//     console.log("Server is Running")
+// })
