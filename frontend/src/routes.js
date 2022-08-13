@@ -51,14 +51,4 @@ var routes = [
   
 ];
 
-// for(let program in cardInfo){
-//   routes.push({
-//     path: `/redeem/${cardInfo[program].companyName.trim()}`,
-//     name: cardInfo[program].companyName.trim(),
-//     component: CardDetails,
-//     layout: "/auth",
-//   })
-// }
-// console.log(routes);
-
 export default routes;

@@ -5,6 +5,7 @@ import { partnerCode } from "views/pages/Redeem";
 import Header from "components/Headers/Header.js";
 import PointsConfirm from "./confirmation";
 
+
 const PointsModalContent = (props) => {
   // details for transfer document
   const userName = props.userName;
@@ -48,6 +49,8 @@ const PointsModalContent = (props) => {
     refDate += (numTransfers+1).toString()
     setConfirmRefNumber(refDate);
 
+
+
     // access input values here
     const newTransferReq= {
       LoyaltyProgramID: chosenCompany,
@@ -66,6 +69,7 @@ const PointsModalContent = (props) => {
       points: pointsToTransfer
     }
     axios.post('http://localhost:3001/admin/updatepoints', pointsUsed);
+
     // clear all input values in the form
     setPointsToTransfer(0);
     props.clearMemIDFields();
@@ -77,7 +81,7 @@ const PointsModalContent = (props) => {
     if (event.key === "Enter") {
       event.preventDefault();
     }
-}
+  };
 
     return (
       <div>
