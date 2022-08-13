@@ -3,6 +3,7 @@ import React, {useState } from 'react';
 import PointsModalContent from "./pointsTransfer";
 
 
+
 const ProgramModalContent = (props) => {
 
   const memberFormat = props.memberFormat;
@@ -12,14 +13,13 @@ const ProgramModalContent = (props) => {
     
   const chosenCompany = props.chosenCompany;
   const userName = props.userName;
-  const numberPoints = props.numberPoints;
 
   const [membershipID, setMembershipID] = useState('');
   const [confirmID, setConfirmID] = useState('');
 
   const minExAmount = props.minExAmount;  
 
-  function MembershipValidation(event){
+  function HandleSubmit(event){
     event.preventDefault(); // prevent page refresh
     var formatValid = true;
     if(membershipID === confirmID){
@@ -93,13 +93,12 @@ const ProgramModalContent = (props) => {
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={MembershipValidation}>
+          <Button variant="primary" type="submit" onClick={HandleSubmit}>
             Save Membership
           </Button>
         </Modal.Footer>
       </Modal>
-      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} 
-      userName={userName} numberPoints={numberPoints} clearMemIDFields={clearMemIDFields} minExAmount={minExAmount}/>
+      <PointsModalContent show={pointsshow} close={handlePointsClose} chosenCompany={chosenCompany} membershipID={membershipID} userName={userName} clearMemIDFields={clearMemIDFields} minExAmount={minExAmount}/>
     </div>
     )
   }

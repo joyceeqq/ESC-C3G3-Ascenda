@@ -1,4 +1,5 @@
 import Index from "views/Index.js";
+import Profile from "views/pages/Profile.js";
 import Register from "views/pages/Register.js";
 import Login from "views/pages/Login.js";
 import Tables from "views/pages/Tables.js";
