@@ -30,12 +30,14 @@ You can then go ahead and submit a pull request to the main branch using the Git
 ## Check backend connection before running project
 ```
 cd backend
-nodemon server
+node server1.js
 ```
+
+Do ensure that the server is running before moving on to the next step.
 ## How to run project (After cloning + pulling from main)
-cd to the directory `final proj` from your current location
+Open a new terminal and cd to the directory `frontend` from your current location
 ```
-cd final-proj
+cd frontend
 ```
 Execute the below command:
 ```
