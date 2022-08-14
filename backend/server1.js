@@ -20,11 +20,12 @@ app.listen(3001, function(){
 
 // Polling section
 const {pushSchedule, pollCompilePushAccrual, pollForHandbackUpdate, handbackRetrieved} = require('./Functions/sftpPushPollInterval.js');
+const {updateTransactions, readHandbackFileAsJson} = require('./Functions/processHandbackCSV.js');
 
 var dailyPoll = setInterval(function()
 {
     let date = new Date();
-    let currentPushSchedule = pushSchedule(19, 23, 0, 0);
+    let currentPushSchedule = pushSchedule(8, 47, 0, 0);
 
     if (date.getHours() === currentPushSchedule.getHours() && date.getMinutes() === currentPushSchedule.getMinutes())
     {
@@ -38,6 +39,7 @@ var dailyPoll = setInterval(function()
     else if (handbackRetrieved())
     {
         console.log("Handback for today retrieved");
+        updateTransactions(readHandbackFileAsJson(new Date()));
     }
     else if (date.getTime() < currentPushSchedule.getTime())
     {
@@ -46,17 +48,3 @@ var dailyPoll = setInterval(function()
 
 
 }, 5000);
-
-// const express=require("express")
-
-// // Importing all the routes
-// const memberRoute=require("./routes/membershipRoute")
-// const programRoute=require("./routes/programRoute")
-
-  
-// // Handling routes request
-// app.use("/admin/redeem",memberRoute)
-// app.use("/admin/addProgram",loginroute)
-// app.listen((3000),()=>{
-//     console.log("Server is Running")
-// })

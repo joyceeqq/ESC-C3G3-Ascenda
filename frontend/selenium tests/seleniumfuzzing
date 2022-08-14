@@ -1,0 +1,531 @@
+const {Builder, Browser, By, Key, until} = require('selenium-webdriver');
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+function num_lessthan_9()
+{
+  return Math.floor(1 + Math.random() * 900000000);
+}
+function rand_str()
+{
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 15; i++ ) 
+  {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+  
+}
+function num_less500()
+{
+  return Math.floor(0 + Math.random() * 500);
+}
+function num_9()
+{
+  return Math.floor(100000000 + Math.random() * 900000000);
+}
+function with_letter()
+{
+  var a=num_9();
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  const b = alphabet[Math.floor(Math.random() * alphabet.length)];
+  return a+b;
+}
+function num_10()
+{
+  return Math.floor(1000000000 + Math.random() * 9000000000);
+}
+function num_morethan_10()
+{
+  return Math.floor(10000000000 + Math.random() * 9000000000000);
+}
+
+
+(async function example() {
+
+
+  let driver = await new Builder().forBrowser(Browser.CHROME).build();
+  try {
+    var complete=0;
+    await driver.get('http://localhost:3000/admin/redeem');
+    driver.manage().window().maximize();
+    console.log("Maximised");
+    //////////////////////
+    //BARCLAYS- LENGTH 9
+    /////////////////////
+
+    for(let i=0; i<20; i++)
+    {
+      var x=num_9();
+      await driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      //await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      //await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys("500");
+      //await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      //await sleep(2000);
+      await driver.findElement(By.xpath("//button[contains(.,'Done')]")).click();
+      //await sleep(1000);
+      
+     // await sleep(1000);
+      console.log("Success")
+
+    }
+
+    for(let i=0; i<20; i++)
+    { //case of id mismatch
+      var x=num_9();
+      var y=num_9();
+      await driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+     // await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+     // await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(y);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      // driver.findElement(By.xpath("//button[contains(.,'OK')]")).click();
+      // await sleep(1000);
+      driver.switchTo().alert().accept();
+      await sleep(2000);
+      await driver.findElement(By.css(".btn-close")).click();
+      
+      await sleep(2000);
+
+
+      console.log("Success");
+
+    }
+
+    for(let i=0; i<20; i++)
+    {
+      //case when ID is of wrong length
+      x=num_morethan_10();
+      await  driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      //driver.findElement(By.xpath("//div[3]/div/div/div/button")).click();
+      await driver.findElement(By.name("membershipID")).clear();
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      ///await sleep(1000);
+
+      await driver.findElement(By.name("confirmID")).clear();
+     // await sleep(1000);
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+      await sleep(1000);
+
+    // await driver.findElement(By.cssSelector(".btn-close")).click();
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      // driver.findElement(By.xpath("//button[contains(.,'OK')]")).click();
+      // await sleep(1000);
+      driver.switchTo().alert().accept();
+      await sleep(2000);
+      await driver.findElement(By.css(".btn-close")).click();
+      
+      await sleep(2000);
+
+
+      console.log("Success");
+      
+    }
+
+
+    for(let i=0; i<20; i++)
+    {
+      //case when ID is random string
+      x=rand_str();
+      await  driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      //driver.findElement(By.xpath("//div[3]/div/div/div/button")).click();
+      await driver.findElement(By.name("membershipID")).clear();
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      //await sleep(1000);
+
+      await driver.findElement(By.name("confirmID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+      await sleep(1000);
+
+    // await driver.findElement(By.cssSelector(".btn-close")).click();
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      // driver.findElement(By.xpath("//button[contains(.,'OK')]")).click();
+      // await sleep(1000);
+      driver.switchTo().alert().accept();
+      await sleep(2000);
+      await driver.findElement(By.css(".btn-close")).click();
+      
+      await sleep(2000);
+
+
+      console.log("Success");
+    }
+
+
+
+    for(let i=0; i<20; i++)
+    {
+      //case when inputted number of points is greater than no. of points
+      x=num_9()
+      var y=num_morethan_10();
+      await driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+     // await sleep(1000);
+
+      await driver.findElement(By.name("confirmID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      //await sleep(1000);
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+      await sleep(1000);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+     // await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+     // await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys(y);
+      await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      driver.switchTo().alert().accept();
+      //await sleep(2000);
+      await driver.findElement(By.css(".btn-close")).click();
+      
+      await sleep(2000);
+
+
+      console.log("Success");
+    }
+
+    for(let i=0; i<20; i++)
+    {
+      //case when inputted number of points is less than min amount
+      x=num_9()
+      var y=num_less500();
+      await driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+     // await sleep(1000);
+
+      await driver.findElement(By.name("confirmID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      //await sleep(1000);
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+      await sleep(1000);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys(y);
+      //await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      //await sleep(2000);
+      driver.switchTo().alert().accept();
+      await sleep(2000);
+      await driver.findElement(By.css(".btn-close")).click();
+      
+      //await sleep(2000);
+
+
+      console.log("Success");
+    }
+
+    for(let i=0; i<20; i++)
+    {
+      //case when inputted number of points is random string
+      x=num_9()
+      var y=rand_str();
+      await driver.findElement(By.xpath("//button[contains(.,'Transfer')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      //await sleep(1000);
+
+      await driver.findElement(By.name("confirmID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+      await sleep(1000);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys(y);
+     // await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      driver.switchTo().alert().accept();
+      await sleep(2000);
+      await driver.findElement(By.css(".btn-close")).click();
+      
+      //await sleep(2000);
+
+
+      console.log("Success");
+    }
+
+    //////////////////////
+    //SIA- LENGTH 10
+    /////////////////////
+    //driver.findElement(By.xpath("//div[2]/div/div/button")).click();
+
+
+    for(let i=0; i<20; i++)
+    {
+      var x=num_10();
+      await driver.findElement(By.xpath("//div[2]/div/div/button")).click();
+     // await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      //await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+     // await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      //await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys("500");
+      await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      await driver.findElement(By.xpath("//button[contains(.,'Done')]")).click();
+      await sleep(1000);
+      
+     // await sleep(1000);
+      console.log("Success")
+
+    }
+
+  
+
+
+
+    //////////////////////
+    //GOJET- LENGTH 10
+    /////////////////////
+    //driver.findElement(By.xpath("//div[3]/div/div/button")).click();
+    for(let i=0; i<20; i++)
+    {
+      var x=num_10();
+      await driver.findElement(By.xpath("//div[3]/div/div/button")).click();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys("500");
+      await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      await driver.findElement(By.xpath("//button[contains(.,'Done')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      console.log("Success")
+
+    }
+
+
+
+
+    //////////////////////
+    //CONRAD- LENGTH 9
+    /////////////////////
+    //driver.findElement(By.xpath("//div[4]/div/div/button")).click();
+
+    for(let i=0; i<20; i++)
+    {
+      var x=num_9();
+      await driver.findElement(By.xpath("//div[4]/div/div/button")).click();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys("500");
+      await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      await driver.findElement(By.xpath("//button[contains(.,'Done')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      console.log("Success")
+
+    }
+
+
+
+    //////////////////////
+    //MILLENIUM- LENGTH 9+ 1 LETTER
+    /////////////////////
+    //driver.findElement(By.xpath("//div[5]/div/div/button")).click();
+
+
+    for(let i=0; i<20; i++)
+    {
+      var x=with_letter();
+      await driver.findElement(By.xpath("//div[5]/div/div/button")).click();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys("500");
+      await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      await driver.findElement(By.xpath("//button[contains(.,'Done')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      console.log("Success")
+
+    }
+
+
+
+    //////////////////////
+    //QUANTAS- LENGTH 9
+    /////////////////////
+    //driver.findElement(By.xpath("//div[6]/div/div/button")).click();
+
+
+    for(let i=0; i<20; i++)
+    {
+      var x=num_9();
+      await driver.findElement(By.xpath("//div[6]/div/div/button")).click();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).clear();
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).click(); // Keep this click statement even if you are using click before clear.
+      await sleep(1000);
+      await driver.findElement(By.name("membershipID")).sendKeys(x);
+      
+      await driver.findElement(By.name("confirmID")).clear();
+      await driver.findElement(By.name("confirmID")).click(); // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.name("confirmID")).sendKeys(x);
+
+      await driver.findElement(By.xpath("//button[contains(.,'Save Membership')]")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).click();
+      await sleep(1000);
+      await driver.findElement(By.id("exampleForm.ControlInput1")).clear();
+          // Keep this click statement even if you are using click before clear.
+      await driver.findElement(By.id("exampleForm.ControlInput1")).sendKeys("500");
+      await sleep(1000);
+      await driver.findElement(By.xpath("//button[contains(.,'Complete Transfer')]")).click();
+      await sleep(2000);
+      await driver.findElement(By.xpath("//button[contains(.,'Done')]")).click();
+      await sleep(1000);
+      
+      await sleep(1000);
+      console.log("Success")
+
+    }
+
+    console.log("Exit Without Failure");
+  } finally {
+    
+    await driver.quit();
+  }
+})();
