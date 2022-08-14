@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const transferReq = require("./../Model/transactionDetailModel");
 const program = require("./../Model/programModel");
-const programDet = require("./../Model/programDetailModel");
 const transactionDet = require("./../Model/transactionDetailModel");
 const {jsonToCSV, createHeader, createFileName} = require("../Functions/generateTransactionCSV");
 const {connectToSFTP, putDataToSFTP, getDataFromSFTP, getRecentHandbackFileName} = require("../sftp");
